@@ -5,13 +5,13 @@ import 'package:workout_companion_flutter/core/data/models/error/failures.dart';
 import 'package:workout_companion_flutter/core/domain/usecases/future_usecase.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/repositories/pairing_repository.dart';
 
-class PairDevice implements FutureUseCase<bool, Params> {
+class PairDevice implements FutureUseCase<void, Params> {
   final PairingRepository repository;
 
   PairDevice(this.repository);
 
   @override
-  Future<Either<Failure, bool>> call(Params params) {
+  Future<Either<Failure, void>> call(Params params) {
     return repository.pairDevice(params.macAddress);
   }
 }
