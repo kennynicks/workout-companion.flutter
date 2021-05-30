@@ -3,13 +3,13 @@ import "package:meta/meta.dart";
 
 class Sensor extends Equatable {
   final String name;
-  final String macAddress;
+  final String id;
   final SensorType type;
 
-  Sensor({@required this.name, @required this.macAddress, @required this.type});
+  Sensor({@required this.name, @required this.id, @required this.type});
 
   @override
-  List<Object> get props => [this.macAddress, this.name, this.type];
+  List<Object> get props => [this.id, this.name, this.type];
 }
 
 enum SensorType { Cadence, HeartRate, Trainer }

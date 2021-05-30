@@ -18,8 +18,19 @@ class BleDataSourceImpl implements BleDataSource {
 
   @override
   Future<Stream<List<SensorModel>>> getConnectedDevicesStream() async {
-    if (await flutterBlue.isAvailable) {}
-    throw BluetoothUnavailableException();
+    if (!await flutterBlue.isOn) {
+      throw BluetoothOffException();
+    }
+    if (!await flutterBlue.isAvailable) {
+      throw BluetoothUnavailableException();
+    }
+    return flutterBlue.connectedDevices.asStream().asyncMap(
+        (List<BluetoothDevice> devices) => devices
+            .map((BluetoothDevice device) => SensorModel(
+                name: device.name,
+                id: device.id.id,
+                type: SensorModel.getSensorTypeFromSpecs()))
+            .toList());
   }
 
   @override
