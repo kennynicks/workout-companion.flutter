@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:workout_companion_flutter/features/pairing/domain/entities/sensor.dart';
+import 'package:workout_companion_flutter/core/domain/entities/sensor.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/repositories/pairing_repository.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/usecases/get_filtered_devices.dart';
 
@@ -19,12 +19,12 @@ void main() {
   final tSensorType = SensorType.HeartRate;
   final tResult = Stream<List<Sensor>>.empty();
 
-  test('should retrieve a list of devices matching the sensor-type', () {
+  test('should retrieve a list of devices matching the sensor-type', () async {
     // arrange
     when(mockPairingRepository.getFilteredDevices(any))
-        .thenReturn(Right(tResult));
+        .thenAnswer((_) async => Right(tResult));
     // act
-    final result = usecase(Params(type: tSensorType));
+    final result = await usecase(Params(type: tSensorType));
     // assert
     expect(result, Right(tResult));
     verify(mockPairingRepository.getFilteredDevices(tSensorType));
