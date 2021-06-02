@@ -48,6 +48,12 @@ void main() {
     test('should throw BluetoothOffException when bluetooth is turned off',
         () async {
       // arrange
+      final tId = "tId";
+      final tName = "tName";
+      final tBleDevice = createBluetoothDevice(tId, tName);
+      final tBleResult = [tBleDevice];
+      when(mockFlutterBlue.connectedDevices)
+          .thenAnswer((_) async => tBleResult);
       when(mockFlutterBlue.isOn).thenAnswer((_) async => false);
       when(mockFlutterBlue.isAvailable).thenAnswer((_) async => true);
       // act
@@ -58,6 +64,12 @@ void main() {
 
     test('should check if bluetooth is available and on', () async {
       // arrange
+      final tId = "tId";
+      final tName = "tName";
+      final tBleDevice = createBluetoothDevice(tId, tName);
+      final tBleResult = [tBleDevice];
+      when(mockFlutterBlue.connectedDevices)
+          .thenAnswer((_) async => tBleResult);
       when(mockFlutterBlue.isOn).thenAnswer((_) async => true);
       when(mockFlutterBlue.isAvailable).thenAnswer((_) async => true);
       // act
