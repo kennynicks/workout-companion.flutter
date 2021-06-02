@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_blue/flutter_blue.dart';
+import 'package:workout_companion_flutter/core/data/datasources/ble_datasource.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,8 +51,40 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
-  void _incrementCounter() {
+  FlutterBlue flutterBlue = FlutterBlue.instance;
+  List<ScanResult> scanResults = [];
+//heat-rate = "0000180d-0000-1000-8000-00805f9b34fb"
+//cadence = "0001816-0000-1000-8000-00805f9b34fb"
+//power = "00001818-0000-1000-8000-00805f9b34fb", "00001826-0000-1000-8000-00805f9b34fb"
+//see https://gist.github.com/sam016/4abe921b5a9ee27f67b3686910293026
+  void _incrementCounter() async {
+    await flutterBlue.stopScan();
+    log("${await flutterBlue.connectedDevices}");
+    flutterBlue.scan(
+      allowDuplicates: false,
+      timeout: Duration(seconds: 10),
+      withServices: [
+        Guid("0000180d-0000-1000-8000-00805f9b34fb"),
+        Guid("00001816-0000-1000-8000-00805f9b34fb"),
+        Guid("00001818-0000-1000-8000-00805f9b34fb"),
+        Guid("00001826-0000-1000-8000-00805f9b34fb"),
+      ],
+    ).listen((event) async {
+      log("$event");
+      log("state = ${await event.device.state.first}");
+    });
+    // flutterBlue.scan(allowDuplicates: false,).listen((event) {});
+    // flutterBlue.startScan();
+    // flutterBlue.scanResults.listen((List<ScanResult> devices) {
+    //   devices.forEach((device) async {
+    //     if (!scanResults
+    //         .any((scanResult) => scanResult.hashCode == device.hashCode)) {
+    //       scanResults.add(device);
+    //       log("${device.advertisementData.serviceUuids}");
+    //     }
+    //   });
+    // });
+    await flutterBlue.stopScan();
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
