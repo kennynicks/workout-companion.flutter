@@ -15,3 +15,7 @@ class BluetoothOffFailure extends Failure {
   @override
   List<Object> get props => null;
 }
+
+class IllegalArgumentFailure extends Failure {
+  List<Object> get props => null;
+}

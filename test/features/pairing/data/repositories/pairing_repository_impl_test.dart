@@ -151,6 +151,25 @@ void main() {
       verify(mockBleRemoteDataSource.scanForSensorType(tSensorType));
       expectLater(result.getOrElse(() => null), emits([tSensor]));
     });
+
+    test(
+        'should return a IllegalArgumentFailure when a IllegalArgumentException is thrown',
+        () async {
+      // arrange
+      when(mockBleRemoteDataSource.scanForSensorType(any)).thenThrow(
+        IllegalArgumentException(),
+      );
+      // act
+      final result = await pairingRepositoryImpl.scanForSensorType(tSensorType);
+      // assert
+      verify(mockBleRemoteDataSource.scanForSensorType(tSensorType));
+      expect(
+        result,
+        Left(
+          IllegalArgumentFailure(),
+        ),
+      );
+    });
   });
 
   group("autoConnectSensors", () {

@@ -1,8 +1,10 @@
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:meta/meta.dart';
+import 'package:workout_companion_flutter/core/constants/service_uuids.dart';
 import 'package:workout_companion_flutter/core/data/models/error/exceptions.dart';
 import 'package:workout_companion_flutter/core/data/models/sensor_model.dart';
 import 'package:workout_companion_flutter/core/domain/entities/sensor.dart';
+import 'package:workout_companion_flutter/features/pairing/domain/usecases/scan_for_sensor_type.dart';
 
 abstract class BleRemoteDataSource {
   /// Returns a Stream of Sensor Devices
@@ -43,9 +45,44 @@ class BleRemoteDataSourceImpl implements BleRemoteDataSource {
   }
 
   @override
-  Future<Stream<List<SensorModel>>> scanForSensorType(SensorType sensorType) {
-    // TODO: implement scanForSensorType
-    throw UnimplementedError();
+  Future<Stream<List<SensorModel>>> scanForSensorType(
+      SensorType sensorType) async {
+    if (!await flutterBlue.isAvailable) {
+      throw BluetoothUnavailableException();
+    }
+    if (!await flutterBlue.isOn) {
+      throw BluetoothOffException();
+    }
+    List<String> services;
+    switch (sensorType) {
+      case SensorType.Cadence:
+        services = CADENCE_SENSOR_ADVERTISEMENT_SERVICES;
+        break;
+      case SensorType.HeartRate:
+        services = HEART_RATE_SENSOR_ADVERTISEMENT_SERVICES;
+        break;
+      case SensorType.FitnessMachine:
+        services = FITNESS_MACHINE_SENSOR_ADVERTISEMENT_SERVICES;
+        break;
+      default:
+        throw IllegalArgumentException();
+    }
+    await flutterBlue.stopScan();
+    flutterBlue.startScan(
+      allowDuplicates: false,
+      withServices: services
+          .map(
+            (service) => Guid(service),
+          )
+          .toList(),
+    );
+    return flutterBlue.scanResults.asyncMap(
+      (List<ScanResult> scanResults) => scanResults
+          .map(
+            (ScanResult scanResult) => SensorModel.fromScanResult(scanResult),
+          )
+          .toList(),
+    );
   }
 
   @override

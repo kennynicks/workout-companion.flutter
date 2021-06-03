@@ -133,6 +133,10 @@ class PairingRepositoryImpl implements PairingRepository {
       return Left(
         BluetoothOffFailure(),
       );
+    } on IllegalArgumentException {
+      return Left(
+        IllegalArgumentFailure(),
+      );
     }
   }
 }
