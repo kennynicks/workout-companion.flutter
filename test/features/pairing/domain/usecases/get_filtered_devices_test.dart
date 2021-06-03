@@ -3,17 +3,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_companion_flutter/core/domain/entities/sensor.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/repositories/pairing_repository.dart';
-import 'package:workout_companion_flutter/features/pairing/domain/usecases/get_filtered_devices.dart';
+import 'package:workout_companion_flutter/features/pairing/domain/usecases/scan_for_sensor_type.dart';
 
 class MockPairingRepository extends Mock implements PairingRepository {}
 
 void main() {
-  GetFilteredDevices usecase;
+  ScanForSensorType usecase;
   MockPairingRepository mockPairingRepository;
 
   setUp(() {
     mockPairingRepository = MockPairingRepository();
-    usecase = GetFilteredDevices(mockPairingRepository);
+    usecase = ScanForSensorType(mockPairingRepository);
   });
 
   final tSensorType = SensorType.HeartRate;
@@ -21,13 +21,13 @@ void main() {
 
   test('should retrieve a list of devices matching the sensor-type', () async {
     // arrange
-    when(mockPairingRepository.getFilteredDevices(any))
+    when(mockPairingRepository.scanForSensorType(any))
         .thenAnswer((_) async => Right(tResult));
     // act
     final result = await usecase(Params(type: tSensorType));
     // assert
     expect(result, Right(tResult));
-    verify(mockPairingRepository.getFilteredDevices(tSensorType));
+    verify(mockPairingRepository.scanForSensorType(tSensorType));
     verifyNoMoreInteractions(mockPairingRepository);
   });
 }

@@ -2,32 +2,32 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_companion_flutter/core/domain/usecases/usecase.dart';
-import 'package:workout_companion_flutter/core/domain/entities/sensor.dart';
+import 'package:workout_companion_flutter/features/pairing/domain/entities/SensorBundle.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/repositories/pairing_repository.dart';
-import 'package:workout_companion_flutter/features/pairing/domain/usecases/get_connected_devices.dart';
+import 'package:workout_companion_flutter/features/pairing/domain/usecases/auto_connect_sensors.dart';
 
 class MockPairingRepository extends Mock implements PairingRepository {}
 
 void main() {
-  GetConnectedDevices usecase;
+  AutoConnectSensors usecase;
   MockPairingRepository mockPairingRepository;
 
   setUp(() {
     mockPairingRepository = MockPairingRepository();
-    usecase = GetConnectedDevices(mockPairingRepository);
+    usecase = AutoConnectSensors(mockPairingRepository);
   });
 
-  final tResult = Stream<List<Sensor>>.empty();
+  final tResult = Stream<SensorBundle>.empty();
 
-  test('should retrieve a list of connected devices', () async {
+  test('should retrieve a stream of connected sensors in a bundle', () async {
     // arrange
-    when(mockPairingRepository.listenToConnectedDevices())
+    when(mockPairingRepository.autoConnectSensors())
         .thenAnswer((_) async => Right(tResult));
     // act
     final result = await usecase(NoParams());
     // assert
     expect(result, Right(tResult));
-    verify(mockPairingRepository.listenToConnectedDevices());
+    verify(mockPairingRepository.autoConnectSensors());
     verifyNoMoreInteractions(mockPairingRepository);
   });
 }

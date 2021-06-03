@@ -12,4 +12,4 @@ class Sensor extends Equatable {
   List<Object> get props => [this.id, this.name, this.type];
 }
 
-enum SensorType { Cadence, HeartRate, Trainer }
+enum SensorType { Cadence, HeartRate, FitnessMachine }

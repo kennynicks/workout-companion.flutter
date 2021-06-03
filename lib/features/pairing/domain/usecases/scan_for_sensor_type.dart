@@ -6,14 +6,14 @@ import 'package:workout_companion_flutter/core/domain/usecases/usecase.dart';
 import 'package:workout_companion_flutter/core/domain/entities/sensor.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/repositories/pairing_repository.dart';
 
-class GetFilteredDevices implements UseCase<Stream<List<Sensor>>, Params> {
+class ScanForSensorType implements UseCase<Stream<List<Sensor>>, Params> {
   final PairingRepository repository;
 
-  GetFilteredDevices(this.repository);
+  ScanForSensorType(this.repository);
 
   @override
   Future<Either<Failure, Stream<List<Sensor>>>> call(Params params) {
-    return repository.getFilteredDevices(params.type);
+    return repository.scanForSensorType(params.type);
   }
 }
 
