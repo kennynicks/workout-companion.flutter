@@ -11,6 +11,6 @@ abstract class PairingRepository {
     SensorType type,
   );
   Future<Either<Failure, void>> pairDevice(
-    String macAddress,
+    Sensor sensor,
   );
 }

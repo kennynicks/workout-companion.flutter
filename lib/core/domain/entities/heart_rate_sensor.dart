@@ -5,13 +5,11 @@ class HeartRateSensor extends Sensor {
   HeartRateSensor({
     @required name,
     @required id,
+    @required bluetoothDevice,
   }) : super(
           id: id,
           name: name,
           type: SensorType.HeartRate,
+          bluetoothDevice: bluetoothDevice,
         );
-
-  factory HeartRateSensor.fromSensor(Sensor sensor) {
-    return HeartRateSensor(name: sensor.name, id: sensor.id);
-  }
 }

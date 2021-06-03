@@ -1,18 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:meta/meta.dart';
 import 'package:workout_companion_flutter/core/data/models/error/exceptions.dart';
 import 'package:workout_companion_flutter/core/data/models/sensor_model.dart';
 import 'package:workout_companion_flutter/core/domain/entities/sensor.dart';
-import 'package:workout_companion_flutter/features/pairing/domain/entities/sensor_bundle.dart';
 
 abstract class BleRemoteDataSource {
-  /// Returns a Stream of connected Sensor Devices as a bundle
+  /// Returns a Stream of Sensor Devices
   ///
   /// Throws a [BluetoothOffException] if bluetooth is turned off.
   /// Throws a [BluetoothUnavailableException] if bluetooth is not available
-  Future<Stream<SensorBundle>> runAutoConnect();
+  Future<Stream<List<SensorModel>>> scanForSensors();
 
   /// Returns a Stream of Sensor Devices matching the [SensorType]
   ///
@@ -24,7 +21,7 @@ abstract class BleRemoteDataSource {
   ///
   /// Throws a [BluetoothOffException] if bluetooth is turned off.
   /// Throws a [BluetoothUnavailableException] if bluetooth is not available
-  Future<void> pairDevice(SensorModel sensorModel);
+  Future<void> pairDevice(Sensor sensor);
 }
 
 class BleRemoteDataSourceImpl implements BleRemoteDataSource {
@@ -35,25 +32,25 @@ class BleRemoteDataSourceImpl implements BleRemoteDataSource {
   });
 
   @override
-  Future<void> pairDevice(SensorModel sensorModel) async {
+  Future<void> pairDevice(Sensor sensor) async {
     if (!await flutterBlue.isAvailable) {
       throw BluetoothUnavailableException();
     }
     if (!await flutterBlue.isOn) {
       throw BluetoothOffException();
     }
-    await sensorModel.bluetoothDevice.connect(autoConnect: true);
-  }
-
-  @override
-  Future<Stream<SensorBundle>> runAutoConnect() {
-    // TODO: implement runAutoConnect
-    throw UnimplementedError();
+    await sensor.bluetoothDevice.connect(autoConnect: true);
   }
 
   @override
   Future<Stream<List<SensorModel>>> scanForSensorType(SensorType sensorType) {
     // TODO: implement scanForSensorType
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Stream<List<SensorModel>>> scanForSensors() {
+    // TODO: implement scanForSensors
     throw UnimplementedError();
   }
 }

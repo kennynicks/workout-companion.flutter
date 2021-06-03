@@ -11,7 +11,6 @@ class MockFlutterBlue extends Mock implements FlutterBlue {}
 class MockBluetoothDevice extends Mock implements BluetoothDevice {}
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
   MockFlutterBlue mockFlutterBlue;
   BleRemoteDataSourceImpl dataSource;
 

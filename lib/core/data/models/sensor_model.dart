@@ -8,17 +8,16 @@ import 'package:workout_companion_flutter/core/extensions/ble_matching.dart';
 import 'package:meta/meta.dart';
 
 abstract class SensorModel extends Sensor {
-  final BluetoothDevice bluetoothDevice;
-
   SensorModel({
     @required String name,
     @required String id,
     @required SensorType type,
-    @required this.bluetoothDevice,
+    @required BluetoothDevice bluetoothDevice,
   }) : super(
           id: id,
           name: name,
           type: type,
+          bluetoothDevice: bluetoothDevice,
         );
 
   factory SensorModel.fromScanResult(ScanResult scanResult) {
