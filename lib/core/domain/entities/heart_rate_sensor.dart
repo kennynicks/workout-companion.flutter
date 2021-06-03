@@ -12,4 +12,12 @@ class HeartRateSensor extends Sensor {
           type: SensorType.HeartRate,
           bluetoothDevice: bluetoothDevice,
         );
+
+  factory HeartRateSensor.fromSensor(Sensor sensor) {
+    return HeartRateSensor(
+      name: sensor.name,
+      id: sensor.id,
+      bluetoothDevice: sensor.bluetoothDevice,
+    );
+  }
 }

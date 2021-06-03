@@ -1,7 +1,7 @@
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
-import 'package:workout_companion_flutter/core/data/datasources/ble_remote_datasource.dart';
+import 'package:workout_companion_flutter/core/data/datasources/ble_remote_data_source.dart';
 import 'package:workout_companion_flutter/core/data/models/cadence_sensor_model.dart';
 import 'package:workout_companion_flutter/core/data/models/error/exceptions.dart';
 import 'package:flutter_blue/gen/flutterblue.pb.dart' as proto;

@@ -12,4 +12,12 @@ class FitnessMachineSensor extends Sensor {
           type: SensorType.FitnessMachine,
           bluetoothDevice: bluetoothDevice,
         );
+
+  factory FitnessMachineSensor.fromSensor(Sensor sensor) {
+    return FitnessMachineSensor(
+      name: sensor.name,
+      id: sensor.id,
+      bluetoothDevice: sensor.bluetoothDevice,
+    );
+  }
 }

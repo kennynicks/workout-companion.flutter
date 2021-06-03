@@ -12,4 +12,12 @@ class CadenceSensor extends Sensor {
           type: SensorType.Cadence,
           bluetoothDevice: bluetoothDevice,
         );
+
+  factory CadenceSensor.fromSensor(Sensor sensor) {
+    return CadenceSensor(
+      name: sensor.name,
+      id: sensor.id,
+      bluetoothDevice: sensor.bluetoothDevice,
+    );
+  }
 }
