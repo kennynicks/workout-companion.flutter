@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import 'package:workout_companion_flutter/core/data/models/error/failures.dart';
 import 'package:workout_companion_flutter/core/domain/entities/sensor.dart';
-import 'package:workout_companion_flutter/features/pairing/domain/entities/SensorBundle.dart';
+import 'package:workout_companion_flutter/features/pairing/domain/entities/sensor_bundle.dart';
 
 abstract class PairingRepository {
   Future<Either<Failure, Stream<SensorBundle>>> autoConnectSensors();

@@ -2,7 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:workout_companion_flutter/core/domain/usecases/usecase.dart';
-import 'package:workout_companion_flutter/features/pairing/domain/entities/SensorBundle.dart';
+import 'package:workout_companion_flutter/features/pairing/domain/entities/sensor_bundle.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/repositories/pairing_repository.dart';
 import 'package:workout_companion_flutter/features/pairing/domain/usecases/auto_connect_sensors.dart';
 

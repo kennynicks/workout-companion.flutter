@@ -10,4 +10,8 @@ class HeartRateSensor extends Sensor {
           name: name,
           type: SensorType.HeartRate,
         );
+
+  factory HeartRateSensor.fromSensor(Sensor sensor) {
+    return HeartRateSensor(name: sensor.name, id: sensor.id);
+  }
 }
