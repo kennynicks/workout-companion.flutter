@@ -24,6 +24,9 @@ abstract class BleRemoteDataSource {
   /// Throws a [BluetoothOffException] if bluetooth is turned off.
   /// Throws a [BluetoothUnavailableException] if bluetooth is not available
   Future<void> pairDevice(Sensor sensor);
+
+  /// Stops the scanning if a scan is running
+  Future<void> stopScan();
 }
 
 class BleRemoteDataSourceImpl implements BleRemoteDataSource {
@@ -111,5 +114,10 @@ class BleRemoteDataSourceImpl implements BleRemoteDataSource {
           )
           .toList(),
     );
+  }
+
+  @override
+  Future<void> stopScan() async {
+    await flutterBlue.stopScan();
   }
 }

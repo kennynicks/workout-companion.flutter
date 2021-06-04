@@ -13,4 +13,5 @@ abstract class PairingRepository {
   Future<Either<Failure, void>> pairDevice(
     Sensor sensor,
   );
+  Future<Either<Failure, void>> stopScan();
 }

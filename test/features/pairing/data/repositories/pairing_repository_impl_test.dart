@@ -282,4 +282,16 @@ void main() {
       );
     });
   });
+
+  group("stopScan", () {
+    test('should stop the scan', () async {
+      // arrange
+
+      // act
+      final result = await pairingRepositoryImpl.stopScan();
+      // assert
+      verify(mockBleRemoteDataSource.stopScan());
+      expect(result, Right(null));
+    });
+  });
 }

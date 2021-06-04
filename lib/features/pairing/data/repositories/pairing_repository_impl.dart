@@ -139,4 +139,9 @@ class PairingRepositoryImpl implements PairingRepository {
       );
     }
   }
+
+  @override
+  Future<Either<Failure, void>> stopScan() async {
+    return Right(await bleRemoteDataSource.stopScan());
+  }
 }

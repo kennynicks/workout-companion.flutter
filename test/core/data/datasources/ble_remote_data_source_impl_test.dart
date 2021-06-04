@@ -314,4 +314,15 @@ void main() {
       expectLater(result, emits([tCadenceSensorModel]));
     });
   });
+
+  group("stopScan", () {
+    test('should stop the scanning process', () async {
+      // arrange
+
+      // act
+      await dataSource.stopScan();
+      // assert
+      verify(mockFlutterBlue.stopScan());
+    });
+  });
 }
