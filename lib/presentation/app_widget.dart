@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_companion_flutter/presentation/routes/router.gr.dart';
+import 'package:workout_companion_flutter/presentation/routes/app_router.gr.dart';
 
 class AppWidget extends StatelessWidget {
   final _appRouter = AppRouter();
