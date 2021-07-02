@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:workout_companion_flutter/application/core/bloc/cadence/cadence_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:workout_companion_flutter/application/core/bloc/fitnessmachine/fitnessmachine_bloc.dart';
@@ -11,6 +12,7 @@ part 'pairing_event.dart';
 part 'pairing_state.dart';
 part 'pairing_bloc.freezed.dart';
 
+@injectable
 class PairingBloc extends Bloc<PairingEvent, PairingState> {
   final CadenceBloc cadenceBloc;
   final HeartrateBloc heartrateBloc;
@@ -53,9 +55,19 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
     PairingEvent event,
   ) async* {
     yield* event.map(pairingStarted: (e) async* {
-      //TODO implement
+      heartrateBloc.add(const HeartrateEvent.searchStarted());
+      cadenceBloc.add(const CadenceEvent.searchStarted());
+      fitnessmachineBloc.add(const FitnessmachineEvent.searchStarted());
+      yield const PairingState.pairing(
+        cadenceConnected: false,
+        heartrateConnected: false,
+        fitnessmachineConnected: false,
+      );
     }, pairingSkipped: (e) async* {
-      //TODO implement
+      heartrateBloc.add(const HeartrateEvent.searchStopped());
+      cadenceBloc.add(const CadenceEvent.searchStopped());
+      fitnessmachineBloc.add(const FitnessmachineEvent.searchStopped());
+      yield const PairingState.initial(); // TODO skipped
     }, cadenceConnected: (e) async* {
       yield state.maybeMap(pairing: (s) {
         if (s.fitnessmachineConnected && s.heartrateConnected) {

@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'fitnessmachine_event.dart';
 part 'fitnessmachine_state.dart';
 part 'fitnessmachine_bloc.freezed.dart';
 
+@injectable
 class FitnessmachineBloc
     extends Bloc<FitnessmachineEvent, FitnessmachineState> {
   FitnessmachineBloc() : super(const _Initial());

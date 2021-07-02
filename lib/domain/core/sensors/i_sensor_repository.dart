@@ -13,4 +13,6 @@ abstract class ISensorRepository {
   Future<Either<BluetoothFailure, Stream<List<Sensor>>>> scanForSensorType(
     SensorType type,
   );
+
+  Future dispose();
 }

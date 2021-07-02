@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'cadence_event.dart';
 part 'cadence_state.dart';
 part 'cadence_bloc.freezed.dart';
 
+@injectable
 class CadenceBloc extends Bloc<CadenceEvent, CadenceState> {
   CadenceBloc() : super(const _Initial());
 
