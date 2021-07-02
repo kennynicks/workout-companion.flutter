@@ -14,7 +14,7 @@ part 'heartrate_event.dart';
 part 'heartrate_state.dart';
 part 'heartrate_bloc.freezed.dart';
 
-@injectable
+@singleton
 class HeartrateBloc extends Bloc<HeartrateEvent, HeartrateState> {
   final ISensorRepository _sensorRepository;
   StreamSubscription? sensorSubscription;

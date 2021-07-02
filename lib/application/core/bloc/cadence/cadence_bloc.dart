@@ -8,7 +8,7 @@ part 'cadence_event.dart';
 part 'cadence_state.dart';
 part 'cadence_bloc.freezed.dart';
 
-@injectable
+@singleton
 class CadenceBloc extends Bloc<CadenceEvent, CadenceState> {
   CadenceBloc() : super(const _Initial());
 

@@ -12,7 +12,7 @@ part 'pairing_event.dart';
 part 'pairing_state.dart';
 part 'pairing_bloc.freezed.dart';
 
-@injectable
+@singleton
 class PairingBloc extends Bloc<PairingEvent, PairingState> {
   final CadenceBloc cadenceBloc;
   final HeartrateBloc heartrateBloc;

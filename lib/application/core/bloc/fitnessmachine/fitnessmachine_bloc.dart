@@ -8,7 +8,7 @@ part 'fitnessmachine_event.dart';
 part 'fitnessmachine_state.dart';
 part 'fitnessmachine_bloc.freezed.dart';
 
-@injectable
+@singleton
 class FitnessmachineBloc
     extends Bloc<FitnessmachineEvent, FitnessmachineState> {
   FitnessmachineBloc() : super(const _Initial());
