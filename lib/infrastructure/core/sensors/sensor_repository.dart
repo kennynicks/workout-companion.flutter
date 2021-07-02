@@ -106,6 +106,7 @@ class SensorRepository implements ISensorRepository {
         }
       },
     );
+    flutterBlue.stopScan(); //TODO check this
     flutterBlue.isScanning.listen((isScanning) {
       log("flutterBlue.isScanning: $isScanning");
       _isScanning = isScanning;
