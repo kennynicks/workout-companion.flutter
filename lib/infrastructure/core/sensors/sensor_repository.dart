@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:injectable/injectable.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/bluetooth_failure.dart';
+import 'package:workout_companion_flutter/domain/core/sensors/heartrate/constants.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/i_sensor_repository.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/sensor_type.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/sensor.dart';
@@ -81,7 +82,7 @@ class SensorRepository implements ISensorRepository {
     await flutterBlue.stopScan();
     final List<String> services = [
       ...CADENCE_SENSOR_ADVERTISEMENT_SERVICES,
-      ...HEART_RATE_SENSOR_ADVERTISEMENT_SERVICES,
+      ...heartrateSensorAdvertisementServices,
       ...FITNESS_MACHINE_SENSOR_ADVERTISEMENT_SERVICES
     ];
     flutterBlue.startScan(

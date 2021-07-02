@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:workout_companion_flutter/domain/core/sensors/heartrate/constants.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/service_uuids.dart';
 
 part 'sensor_type.freezed.dart';
@@ -14,7 +15,7 @@ abstract class SensorType with _$SensorType {
         .every((serviceUuid) => serviceUuids.contains(serviceUuid))) {
       return const SensorType.fitnessmachine();
     }
-    if (HEART_RATE_SENSOR_ADVERTISEMENT_SERVICES
+    if (heartrateSensorAdvertisementServices
         .every((serviceUuid) => serviceUuids.contains(serviceUuid))) {
       return const SensorType.heartrate();
     }
