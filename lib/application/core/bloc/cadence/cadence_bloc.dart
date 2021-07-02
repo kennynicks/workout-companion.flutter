@@ -14,6 +14,22 @@ class CadenceBloc extends Bloc<CadenceEvent, CadenceState> {
   Stream<CadenceState> mapEventToState(
     CadenceEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    yield* event.map(
+      searchStarted: (e) async* {
+        //TODO implement
+      },
+      searchStopped: (e) async* {
+        //TODO implement
+      },
+      invokedDisconnect: (e) async* {
+        //TODO implement
+      },
+      invokedPairing: (e) async* {
+        //TODO implement
+      },
+      valueTransmitted: (e) async* {
+        yield CadenceState.connected(e.cadence);
+      },
+    );
   }
 }

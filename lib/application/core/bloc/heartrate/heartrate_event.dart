@@ -6,5 +6,5 @@ class HeartrateEvent with _$HeartrateEvent {
   const factory HeartrateEvent.searchStopped() = _SearchStopped;
   const factory HeartrateEvent.invokedDisconnect() = _InvokedDisconnect;
   const factory HeartrateEvent.invokedPairing() = _InvokedPairing;
-  const factory HeartrateEvent.valueTransmitted() = _ValueTransmitted;
+  const factory HeartrateEvent.valueTransmitted(int bpm) = _ValueTransmitted;
 }

@@ -6,5 +6,5 @@ class CadenceEvent with _$CadenceEvent {
   const factory CadenceEvent.searchStopped() = _SearchStopped;
   const factory CadenceEvent.invokedDisconnect() = _InvokedDisconnect;
   const factory CadenceEvent.invokedPairing() = _InvokedPairing;
-  const factory CadenceEvent.valueTransmitted() = _ValueTransmitted;
+  const factory CadenceEvent.valueTransmitted(int cadence) = _ValueTransmitted;
 }

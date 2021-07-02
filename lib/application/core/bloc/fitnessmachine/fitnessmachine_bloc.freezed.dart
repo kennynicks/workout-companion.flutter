@@ -32,8 +32,10 @@ class _$FitnessmachineEventTearOff {
     return const _InvokedPairing();
   }
 
-  _ValueTransmitted valueTransmitted() {
-    return const _ValueTransmitted();
+  _ValueTransmitted valueTransmitted(int watt) {
+    return _ValueTransmitted(
+      watt,
+    );
   }
 }
 
@@ -48,7 +50,7 @@ mixin _$FitnessmachineEvent {
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
     required TResult Function() invokedPairing,
-    required TResult Function() valueTransmitted,
+    required TResult Function(int watt) valueTransmitted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,7 +59,7 @@ mixin _$FitnessmachineEvent {
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
     TResult Function()? invokedPairing,
-    TResult Function()? valueTransmitted,
+    TResult Function(int watt)? valueTransmitted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -143,7 +145,7 @@ class _$_SearchStarted implements _SearchStarted {
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
     required TResult Function() invokedPairing,
-    required TResult Function() valueTransmitted,
+    required TResult Function(int watt) valueTransmitted,
   }) {
     return searchStarted();
   }
@@ -155,7 +157,7 @@ class _$_SearchStarted implements _SearchStarted {
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
     TResult Function()? invokedPairing,
-    TResult Function()? valueTransmitted,
+    TResult Function(int watt)? valueTransmitted,
     required TResult orElse(),
   }) {
     if (searchStarted != null) {
@@ -241,7 +243,7 @@ class _$_SearchStopped implements _SearchStopped {
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
     required TResult Function() invokedPairing,
-    required TResult Function() valueTransmitted,
+    required TResult Function(int watt) valueTransmitted,
   }) {
     return searchStopped();
   }
@@ -253,7 +255,7 @@ class _$_SearchStopped implements _SearchStopped {
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
     TResult Function()? invokedPairing,
-    TResult Function()? valueTransmitted,
+    TResult Function(int watt)? valueTransmitted,
     required TResult orElse(),
   }) {
     if (searchStopped != null) {
@@ -339,7 +341,7 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
     required TResult Function() invokedPairing,
-    required TResult Function() valueTransmitted,
+    required TResult Function(int watt) valueTransmitted,
   }) {
     return invokedDisconnect();
   }
@@ -351,7 +353,7 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
     TResult Function()? invokedPairing,
-    TResult Function()? valueTransmitted,
+    TResult Function(int watt)? valueTransmitted,
     required TResult orElse(),
   }) {
     if (invokedDisconnect != null) {
@@ -437,7 +439,7 @@ class _$_InvokedPairing implements _InvokedPairing {
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
     required TResult Function() invokedPairing,
-    required TResult Function() valueTransmitted,
+    required TResult Function(int watt) valueTransmitted,
   }) {
     return invokedPairing();
   }
@@ -449,7 +451,7 @@ class _$_InvokedPairing implements _InvokedPairing {
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
     TResult Function()? invokedPairing,
-    TResult Function()? valueTransmitted,
+    TResult Function(int watt)? valueTransmitted,
     required TResult orElse(),
   }) {
     if (invokedPairing != null) {
@@ -496,6 +498,7 @@ abstract class _$ValueTransmittedCopyWith<$Res> {
   factory _$ValueTransmittedCopyWith(
           _ValueTransmitted value, $Res Function(_ValueTransmitted) then) =
       __$ValueTransmittedCopyWithImpl<$Res>;
+  $Res call({int watt});
 }
 
 /// @nodoc
@@ -508,25 +511,49 @@ class __$ValueTransmittedCopyWithImpl<$Res>
 
   @override
   _ValueTransmitted get _value => super._value as _ValueTransmitted;
+
+  @override
+  $Res call({
+    Object? watt = freezed,
+  }) {
+    return _then(_ValueTransmitted(
+      watt == freezed
+          ? _value.watt
+          : watt // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_ValueTransmitted implements _ValueTransmitted {
-  const _$_ValueTransmitted();
+  const _$_ValueTransmitted(this.watt);
+
+  @override
+  final int watt;
 
   @override
   String toString() {
-    return 'FitnessmachineEvent.valueTransmitted()';
+    return 'FitnessmachineEvent.valueTransmitted(watt: $watt)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _ValueTransmitted);
+    return identical(this, other) ||
+        (other is _ValueTransmitted &&
+            (identical(other.watt, watt) ||
+                const DeepCollectionEquality().equals(other.watt, watt)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(watt);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ValueTransmittedCopyWith<_ValueTransmitted> get copyWith =>
+      __$ValueTransmittedCopyWithImpl<_ValueTransmitted>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -535,9 +562,9 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
     required TResult Function() invokedPairing,
-    required TResult Function() valueTransmitted,
+    required TResult Function(int watt) valueTransmitted,
   }) {
-    return valueTransmitted();
+    return valueTransmitted(watt);
   }
 
   @override
@@ -547,11 +574,11 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
     TResult Function()? invokedPairing,
-    TResult Function()? valueTransmitted,
+    TResult Function(int watt)? valueTransmitted,
     required TResult orElse(),
   }) {
     if (valueTransmitted != null) {
-      return valueTransmitted();
+      return valueTransmitted(watt);
     }
     return orElse();
   }
@@ -586,7 +613,12 @@ class _$_ValueTransmitted implements _ValueTransmitted {
 }
 
 abstract class _ValueTransmitted implements FitnessmachineEvent {
-  const factory _ValueTransmitted() = _$_ValueTransmitted;
+  const factory _ValueTransmitted(int watt) = _$_ValueTransmitted;
+
+  int get watt => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ValueTransmittedCopyWith<_ValueTransmitted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -605,8 +637,10 @@ class _$FitnessmachineStateTearOff {
     return const _Searching();
   }
 
-  _Connected connected() {
-    return const _Connected();
+  _Connected connected(int watt) {
+    return _Connected(
+      watt,
+    );
   }
 }
 
@@ -620,7 +654,7 @@ mixin _$FitnessmachineState {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function() connected,
+    required TResult Function(int watt) connected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -628,7 +662,7 @@ mixin _$FitnessmachineState {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function()? connected,
+    TResult Function(int watt)? connected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -709,7 +743,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function() connected,
+    required TResult Function(int watt) connected,
   }) {
     return initial();
   }
@@ -720,7 +754,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function()? connected,
+    TResult Function(int watt)? connected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -803,7 +837,7 @@ class _$_Disconnected implements _Disconnected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function() connected,
+    required TResult Function(int watt) connected,
   }) {
     return disconnected();
   }
@@ -814,7 +848,7 @@ class _$_Disconnected implements _Disconnected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function()? connected,
+    TResult Function(int watt)? connected,
     required TResult orElse(),
   }) {
     if (disconnected != null) {
@@ -896,7 +930,7 @@ class _$_Searching implements _Searching {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function() connected,
+    required TResult Function(int watt) connected,
   }) {
     return searching();
   }
@@ -907,7 +941,7 @@ class _$_Searching implements _Searching {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function()? connected,
+    TResult Function(int watt)? connected,
     required TResult orElse(),
   }) {
     if (searching != null) {
@@ -952,6 +986,7 @@ abstract class _$ConnectedCopyWith<$Res> {
   factory _$ConnectedCopyWith(
           _Connected value, $Res Function(_Connected) then) =
       __$ConnectedCopyWithImpl<$Res>;
+  $Res call({int watt});
 }
 
 /// @nodoc
@@ -963,25 +998,49 @@ class __$ConnectedCopyWithImpl<$Res>
 
   @override
   _Connected get _value => super._value as _Connected;
+
+  @override
+  $Res call({
+    Object? watt = freezed,
+  }) {
+    return _then(_Connected(
+      watt == freezed
+          ? _value.watt
+          : watt // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Connected implements _Connected {
-  const _$_Connected();
+  const _$_Connected(this.watt);
+
+  @override
+  final int watt;
 
   @override
   String toString() {
-    return 'FitnessmachineState.connected()';
+    return 'FitnessmachineState.connected(watt: $watt)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Connected);
+    return identical(this, other) ||
+        (other is _Connected &&
+            (identical(other.watt, watt) ||
+                const DeepCollectionEquality().equals(other.watt, watt)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(watt);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ConnectedCopyWith<_Connected> get copyWith =>
+      __$ConnectedCopyWithImpl<_Connected>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -989,9 +1048,9 @@ class _$_Connected implements _Connected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function() connected,
+    required TResult Function(int watt) connected,
   }) {
-    return connected();
+    return connected(watt);
   }
 
   @override
@@ -1000,11 +1059,11 @@ class _$_Connected implements _Connected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function()? connected,
+    TResult Function(int watt)? connected,
     required TResult orElse(),
   }) {
     if (connected != null) {
-      return connected();
+      return connected(watt);
     }
     return orElse();
   }
@@ -1037,5 +1096,10 @@ class _$_Connected implements _Connected {
 }
 
 abstract class _Connected implements FitnessmachineState {
-  const factory _Connected() = _$_Connected;
+  const factory _Connected(int watt) = _$_Connected;
+
+  int get watt => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ConnectedCopyWith<_Connected> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -14,6 +14,22 @@ class HeartrateBloc extends Bloc<HeartrateEvent, HeartrateState> {
   Stream<HeartrateState> mapEventToState(
     HeartrateEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    yield* event.map(
+      searchStarted: (e) async* {
+        //TODO implement
+      },
+      searchStopped: (e) async* {
+        //TODO implement
+      },
+      invokedDisconnect: (e) async* {
+        //TODO implement
+      },
+      invokedPairing: (e) async* {
+        //TODO implement
+      },
+      valueTransmitted: (e) async* {
+        yield HeartrateState.connected(e.bpm);
+      },
+    );
   }
 }
