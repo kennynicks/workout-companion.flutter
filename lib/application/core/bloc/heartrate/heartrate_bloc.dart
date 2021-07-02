@@ -56,9 +56,10 @@ class HeartrateBloc extends Bloc<HeartrateEvent, HeartrateState> {
         add(HeartrateEvent.sensorConnected(sensor));
       });
     }, valueTransmitted: (e) async* {
+      log("HeartrateBloc: VALUE TRANSMITTED");
       yield HeartrateState.connected(e.heartrateSensor, e.bpm);
     }, sensorConnected: (e) async* {
-      log("sensor connected");
+      log("HeartrateBloc: sensor connected");
       yield HeartrateState.connected(e.heartrateSensor, null);
     });
   }

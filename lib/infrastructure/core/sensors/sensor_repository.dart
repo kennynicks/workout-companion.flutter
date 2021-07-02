@@ -15,6 +15,7 @@ import 'package:workout_companion_flutter/domain/core/sensors/service_uuids.dart
 class SensorRepository implements ISensorRepository {
   final FlutterBlue flutterBlue;
   StreamController<List<Sensor>> _sensorStream;
+  List<Sensor> lastSensorScan = List.empty();
   bool _isScanning = false;
 
   SensorRepository({required this.flutterBlue})
@@ -48,9 +49,7 @@ class SensorRepository implements ISensorRepository {
     log("starting scan for type $type");
     return right(
       (await sensorStream).asyncMap(
-        (sensors) => sensors
-            .where((sensor) => sensor.type == type || true)
-            .toList(), //TODO remove bool
+        (sensors) => sensors.where((sensor) => sensor.type == type).toList(),
       ),
     );
   }
@@ -73,6 +72,7 @@ class SensorRepository implements ISensorRepository {
       await _startScan();
     } else {
       log("scan already in progress");
+      _sensorStream.add(lastSensorScan);
     }
     return _sensorStream.stream;
   }
@@ -85,8 +85,8 @@ class SensorRepository implements ISensorRepository {
       ...FITNESS_MACHINE_SENSOR_ADVERTISEMENT_SERVICES
     ];
     flutterBlue.startScan(
-        // withServices: services.map((e) => Guid(e)).toList(), // TODO uncomment
-        );
+      withServices: services.map((e) => Guid(e)).toList(),
+    );
     // _isScanning = true;
     log("_sensorStream.isClosed 1: ${_sensorStream.isClosed}");
     if (_sensorStream.isClosed) {
@@ -107,6 +107,7 @@ class SensorRepository implements ISensorRepository {
       },
     );
     flutterBlue.isScanning.listen((isScanning) {
+      log("flutterBlue.isScanning: $isScanning");
       _isScanning = isScanning;
     });
   }
