@@ -636,7 +636,7 @@ class _$CadenceStateTearOff {
     return const _Searching();
   }
 
-  _Connected connected(int cadence) {
+  _Connected connected(int? cadence) {
     return _Connected(
       cadence,
     );
@@ -653,7 +653,7 @@ mixin _$CadenceState {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int cadence) connected,
+    required TResult Function(int? cadence) connected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -661,7 +661,7 @@ mixin _$CadenceState {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int cadence)? connected,
+    TResult Function(int? cadence)? connected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -740,7 +740,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int cadence) connected,
+    required TResult Function(int? cadence) connected,
   }) {
     return initial();
   }
@@ -751,7 +751,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int cadence)? connected,
+    TResult Function(int? cadence)? connected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -833,7 +833,7 @@ class _$_Disconnected implements _Disconnected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int cadence) connected,
+    required TResult Function(int? cadence) connected,
   }) {
     return disconnected();
   }
@@ -844,7 +844,7 @@ class _$_Disconnected implements _Disconnected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int cadence)? connected,
+    TResult Function(int? cadence)? connected,
     required TResult orElse(),
   }) {
     if (disconnected != null) {
@@ -925,7 +925,7 @@ class _$_Searching implements _Searching {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int cadence) connected,
+    required TResult Function(int? cadence) connected,
   }) {
     return searching();
   }
@@ -936,7 +936,7 @@ class _$_Searching implements _Searching {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int cadence)? connected,
+    TResult Function(int? cadence)? connected,
     required TResult orElse(),
   }) {
     if (searching != null) {
@@ -981,7 +981,7 @@ abstract class _$ConnectedCopyWith<$Res> {
   factory _$ConnectedCopyWith(
           _Connected value, $Res Function(_Connected) then) =
       __$ConnectedCopyWithImpl<$Res>;
-  $Res call({int cadence});
+  $Res call({int? cadence});
 }
 
 /// @nodoc
@@ -1001,7 +1001,7 @@ class __$ConnectedCopyWithImpl<$Res> extends _$CadenceStateCopyWithImpl<$Res>
       cadence == freezed
           ? _value.cadence
           : cadence // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -1012,7 +1012,7 @@ class _$_Connected implements _Connected {
   const _$_Connected(this.cadence);
 
   @override
-  final int cadence;
+  final int? cadence;
 
   @override
   String toString() {
@@ -1042,7 +1042,7 @@ class _$_Connected implements _Connected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int cadence) connected,
+    required TResult Function(int? cadence) connected,
   }) {
     return connected(cadence);
   }
@@ -1053,7 +1053,7 @@ class _$_Connected implements _Connected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int cadence)? connected,
+    TResult Function(int? cadence)? connected,
     required TResult orElse(),
   }) {
     if (connected != null) {
@@ -1090,9 +1090,9 @@ class _$_Connected implements _Connected {
 }
 
 abstract class _Connected implements CadenceState {
-  const factory _Connected(int cadence) = _$_Connected;
+  const factory _Connected(int? cadence) = _$_Connected;
 
-  int get cadence => throw _privateConstructorUsedError;
+  int? get cadence => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ConnectedCopyWith<_Connected> get copyWith =>
       throw _privateConstructorUsedError;

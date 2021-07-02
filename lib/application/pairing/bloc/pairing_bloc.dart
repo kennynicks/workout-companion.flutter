@@ -15,30 +15,30 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   final CadenceBloc cadenceBloc;
   final HeartrateBloc heartrateBloc;
   final FitnessmachineBloc fitnessmachineBloc;
-  late StreamSubscription cadenceSubscription;
-  late StreamSubscription heartrateSubscription;
-  late StreamSubscription fitnessmachineSubscription;
+  late StreamSubscription _cadenceSubscription;
+  late StreamSubscription _heartrateSubscription;
+  late StreamSubscription _fitnessmachineSubscription;
 
   PairingBloc({
     required this.cadenceBloc,
     required this.heartrateBloc,
     required this.fitnessmachineBloc,
   }) : super(const _Initial()) {
-    cadenceSubscription = cadenceBloc.stream.listen((state) {
+    _cadenceSubscription = cadenceBloc.stream.listen((state) {
       state.maybeMap(
         connected: (_) => add(const PairingEvent.cadenceConnected()),
         disconnected: (_) => add(const PairingEvent.cadenceDisconnected()),
         orElse: () {},
       );
     });
-    heartrateSubscription = heartrateBloc.stream.listen((state) {
+    _heartrateSubscription = heartrateBloc.stream.listen((state) {
       state.maybeMap(
         connected: (_) => add(const PairingEvent.heartrateConnected()),
         disconnected: (_) => add(const PairingEvent.heartrateDisconnected()),
         orElse: () {},
       );
     });
-    fitnessmachineSubscription = fitnessmachineBloc.stream.listen((state) {
+    _fitnessmachineSubscription = fitnessmachineBloc.stream.listen((state) {
       state.maybeMap(
         connected: (_) => add(const PairingEvent.fitnessmachineConnected()),
         disconnected: (_) =>
@@ -117,5 +117,13 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
         );
       });
     });
+  }
+
+  @override
+  Future<void> close() async {
+    await _heartrateSubscription.cancel();
+    await _cadenceSubscription.cancel();
+    await _fitnessmachineSubscription.cancel();
+    return super.close();
   }
 }

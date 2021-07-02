@@ -28,13 +28,22 @@ class _$HeartrateEventTearOff {
     return const _InvokedDisconnect();
   }
 
-  _InvokedPairing invokedPairing() {
-    return const _InvokedPairing();
+  _InvokedPairing invokedPairing(Sensor heartrateSensor) {
+    return _InvokedPairing(
+      heartrateSensor,
+    );
   }
 
-  _ValueTransmitted valueTransmitted(int bpm) {
+  _ValueTransmitted valueTransmitted(Sensor heartrateSensor, int bpm) {
     return _ValueTransmitted(
+      heartrateSensor,
       bpm,
+    );
+  }
+
+  _SensorConnected sensorConnected(Sensor heartrateSensor) {
+    return _SensorConnected(
+      heartrateSensor,
     );
   }
 }
@@ -49,8 +58,9 @@ mixin _$HeartrateEvent {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) invokedPairing,
+    required TResult Function(Sensor heartrateSensor, int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) sensorConnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,8 +68,9 @@ mixin _$HeartrateEvent {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? invokedPairing,
+    TResult Function(Sensor heartrateSensor, int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? sensorConnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,6 +81,7 @@ mixin _$HeartrateEvent {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +91,7 @@ mixin _$HeartrateEvent {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -144,8 +157,9 @@ class _$_SearchStarted implements _SearchStarted {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) invokedPairing,
+    required TResult Function(Sensor heartrateSensor, int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) sensorConnected,
   }) {
     return searchStarted();
   }
@@ -156,8 +170,9 @@ class _$_SearchStarted implements _SearchStarted {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? invokedPairing,
+    TResult Function(Sensor heartrateSensor, int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? sensorConnected,
     required TResult orElse(),
   }) {
     if (searchStarted != null) {
@@ -174,6 +189,7 @@ class _$_SearchStarted implements _SearchStarted {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
   }) {
     return searchStarted(this);
   }
@@ -186,6 +202,7 @@ class _$_SearchStarted implements _SearchStarted {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
     required TResult orElse(),
   }) {
     if (searchStarted != null) {
@@ -242,8 +259,9 @@ class _$_SearchStopped implements _SearchStopped {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) invokedPairing,
+    required TResult Function(Sensor heartrateSensor, int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) sensorConnected,
   }) {
     return searchStopped();
   }
@@ -254,8 +272,9 @@ class _$_SearchStopped implements _SearchStopped {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? invokedPairing,
+    TResult Function(Sensor heartrateSensor, int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? sensorConnected,
     required TResult orElse(),
   }) {
     if (searchStopped != null) {
@@ -272,6 +291,7 @@ class _$_SearchStopped implements _SearchStopped {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
   }) {
     return searchStopped(this);
   }
@@ -284,6 +304,7 @@ class _$_SearchStopped implements _SearchStopped {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
     required TResult orElse(),
   }) {
     if (searchStopped != null) {
@@ -340,8 +361,9 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) invokedPairing,
+    required TResult Function(Sensor heartrateSensor, int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) sensorConnected,
   }) {
     return invokedDisconnect();
   }
@@ -352,8 +374,9 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? invokedPairing,
+    TResult Function(Sensor heartrateSensor, int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? sensorConnected,
     required TResult orElse(),
   }) {
     if (invokedDisconnect != null) {
@@ -370,6 +393,7 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
   }) {
     return invokedDisconnect(this);
   }
@@ -382,6 +406,7 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
     required TResult orElse(),
   }) {
     if (invokedDisconnect != null) {
@@ -400,6 +425,9 @@ abstract class _$InvokedPairingCopyWith<$Res> {
   factory _$InvokedPairingCopyWith(
           _InvokedPairing value, $Res Function(_InvokedPairing) then) =
       __$InvokedPairingCopyWithImpl<$Res>;
+  $Res call({Sensor heartrateSensor});
+
+  $SensorCopyWith<$Res> get heartrateSensor;
 }
 
 /// @nodoc
@@ -412,25 +440,58 @@ class __$InvokedPairingCopyWithImpl<$Res>
 
   @override
   _InvokedPairing get _value => super._value as _InvokedPairing;
+
+  @override
+  $Res call({
+    Object? heartrateSensor = freezed,
+  }) {
+    return _then(_InvokedPairing(
+      heartrateSensor == freezed
+          ? _value.heartrateSensor
+          : heartrateSensor // ignore: cast_nullable_to_non_nullable
+              as Sensor,
+    ));
+  }
+
+  @override
+  $SensorCopyWith<$Res> get heartrateSensor {
+    return $SensorCopyWith<$Res>(_value.heartrateSensor, (value) {
+      return _then(_value.copyWith(heartrateSensor: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_InvokedPairing implements _InvokedPairing {
-  const _$_InvokedPairing();
+  const _$_InvokedPairing(this.heartrateSensor);
+
+  @override
+  final Sensor heartrateSensor;
 
   @override
   String toString() {
-    return 'HeartrateEvent.invokedPairing()';
+    return 'HeartrateEvent.invokedPairing(heartrateSensor: $heartrateSensor)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _InvokedPairing);
+    return identical(this, other) ||
+        (other is _InvokedPairing &&
+            (identical(other.heartrateSensor, heartrateSensor) ||
+                const DeepCollectionEquality()
+                    .equals(other.heartrateSensor, heartrateSensor)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(heartrateSensor);
+
+  @JsonKey(ignore: true)
+  @override
+  _$InvokedPairingCopyWith<_InvokedPairing> get copyWith =>
+      __$InvokedPairingCopyWithImpl<_InvokedPairing>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -438,10 +499,11 @@ class _$_InvokedPairing implements _InvokedPairing {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) invokedPairing,
+    required TResult Function(Sensor heartrateSensor, int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) sensorConnected,
   }) {
-    return invokedPairing();
+    return invokedPairing(heartrateSensor);
   }
 
   @override
@@ -450,12 +512,13 @@ class _$_InvokedPairing implements _InvokedPairing {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? invokedPairing,
+    TResult Function(Sensor heartrateSensor, int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? sensorConnected,
     required TResult orElse(),
   }) {
     if (invokedPairing != null) {
-      return invokedPairing();
+      return invokedPairing(heartrateSensor);
     }
     return orElse();
   }
@@ -468,6 +531,7 @@ class _$_InvokedPairing implements _InvokedPairing {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
   }) {
     return invokedPairing(this);
   }
@@ -480,6 +544,7 @@ class _$_InvokedPairing implements _InvokedPairing {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
     required TResult orElse(),
   }) {
     if (invokedPairing != null) {
@@ -490,7 +555,12 @@ class _$_InvokedPairing implements _InvokedPairing {
 }
 
 abstract class _InvokedPairing implements HeartrateEvent {
-  const factory _InvokedPairing() = _$_InvokedPairing;
+  const factory _InvokedPairing(Sensor heartrateSensor) = _$_InvokedPairing;
+
+  Sensor get heartrateSensor => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$InvokedPairingCopyWith<_InvokedPairing> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -498,7 +568,9 @@ abstract class _$ValueTransmittedCopyWith<$Res> {
   factory _$ValueTransmittedCopyWith(
           _ValueTransmitted value, $Res Function(_ValueTransmitted) then) =
       __$ValueTransmittedCopyWithImpl<$Res>;
-  $Res call({int bpm});
+  $Res call({Sensor heartrateSensor, int bpm});
+
+  $SensorCopyWith<$Res> get heartrateSensor;
 }
 
 /// @nodoc
@@ -514,41 +586,60 @@ class __$ValueTransmittedCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? heartrateSensor = freezed,
     Object? bpm = freezed,
   }) {
     return _then(_ValueTransmitted(
+      heartrateSensor == freezed
+          ? _value.heartrateSensor
+          : heartrateSensor // ignore: cast_nullable_to_non_nullable
+              as Sensor,
       bpm == freezed
           ? _value.bpm
           : bpm // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
+
+  @override
+  $SensorCopyWith<$Res> get heartrateSensor {
+    return $SensorCopyWith<$Res>(_value.heartrateSensor, (value) {
+      return _then(_value.copyWith(heartrateSensor: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_ValueTransmitted implements _ValueTransmitted {
-  const _$_ValueTransmitted(this.bpm);
+  const _$_ValueTransmitted(this.heartrateSensor, this.bpm);
 
+  @override
+  final Sensor heartrateSensor;
   @override
   final int bpm;
 
   @override
   String toString() {
-    return 'HeartrateEvent.valueTransmitted(bpm: $bpm)';
+    return 'HeartrateEvent.valueTransmitted(heartrateSensor: $heartrateSensor, bpm: $bpm)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ValueTransmitted &&
+            (identical(other.heartrateSensor, heartrateSensor) ||
+                const DeepCollectionEquality()
+                    .equals(other.heartrateSensor, heartrateSensor)) &&
             (identical(other.bpm, bpm) ||
                 const DeepCollectionEquality().equals(other.bpm, bpm)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(bpm);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(heartrateSensor) ^
+      const DeepCollectionEquality().hash(bpm);
 
   @JsonKey(ignore: true)
   @override
@@ -561,10 +652,11 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) invokedPairing,
+    required TResult Function(Sensor heartrateSensor, int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) sensorConnected,
   }) {
-    return valueTransmitted(bpm);
+    return valueTransmitted(heartrateSensor, bpm);
   }
 
   @override
@@ -573,12 +665,13 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? invokedPairing,
+    TResult Function(Sensor heartrateSensor, int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? sensorConnected,
     required TResult orElse(),
   }) {
     if (valueTransmitted != null) {
-      return valueTransmitted(bpm);
+      return valueTransmitted(heartrateSensor, bpm);
     }
     return orElse();
   }
@@ -591,6 +684,7 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
   }) {
     return valueTransmitted(this);
   }
@@ -603,6 +697,7 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
     required TResult orElse(),
   }) {
     if (valueTransmitted != null) {
@@ -613,11 +708,156 @@ class _$_ValueTransmitted implements _ValueTransmitted {
 }
 
 abstract class _ValueTransmitted implements HeartrateEvent {
-  const factory _ValueTransmitted(int bpm) = _$_ValueTransmitted;
+  const factory _ValueTransmitted(Sensor heartrateSensor, int bpm) =
+      _$_ValueTransmitted;
 
+  Sensor get heartrateSensor => throw _privateConstructorUsedError;
   int get bpm => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ValueTransmittedCopyWith<_ValueTransmitted> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SensorConnectedCopyWith<$Res> {
+  factory _$SensorConnectedCopyWith(
+          _SensorConnected value, $Res Function(_SensorConnected) then) =
+      __$SensorConnectedCopyWithImpl<$Res>;
+  $Res call({Sensor heartrateSensor});
+
+  $SensorCopyWith<$Res> get heartrateSensor;
+}
+
+/// @nodoc
+class __$SensorConnectedCopyWithImpl<$Res>
+    extends _$HeartrateEventCopyWithImpl<$Res>
+    implements _$SensorConnectedCopyWith<$Res> {
+  __$SensorConnectedCopyWithImpl(
+      _SensorConnected _value, $Res Function(_SensorConnected) _then)
+      : super(_value, (v) => _then(v as _SensorConnected));
+
+  @override
+  _SensorConnected get _value => super._value as _SensorConnected;
+
+  @override
+  $Res call({
+    Object? heartrateSensor = freezed,
+  }) {
+    return _then(_SensorConnected(
+      heartrateSensor == freezed
+          ? _value.heartrateSensor
+          : heartrateSensor // ignore: cast_nullable_to_non_nullable
+              as Sensor,
+    ));
+  }
+
+  @override
+  $SensorCopyWith<$Res> get heartrateSensor {
+    return $SensorCopyWith<$Res>(_value.heartrateSensor, (value) {
+      return _then(_value.copyWith(heartrateSensor: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SensorConnected implements _SensorConnected {
+  const _$_SensorConnected(this.heartrateSensor);
+
+  @override
+  final Sensor heartrateSensor;
+
+  @override
+  String toString() {
+    return 'HeartrateEvent.sensorConnected(heartrateSensor: $heartrateSensor)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _SensorConnected &&
+            (identical(other.heartrateSensor, heartrateSensor) ||
+                const DeepCollectionEquality()
+                    .equals(other.heartrateSensor, heartrateSensor)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(heartrateSensor);
+
+  @JsonKey(ignore: true)
+  @override
+  _$SensorConnectedCopyWith<_SensorConnected> get copyWith =>
+      __$SensorConnectedCopyWithImpl<_SensorConnected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() searchStarted,
+    required TResult Function() searchStopped,
+    required TResult Function() invokedDisconnect,
+    required TResult Function(Sensor heartrateSensor) invokedPairing,
+    required TResult Function(Sensor heartrateSensor, int bpm) valueTransmitted,
+    required TResult Function(Sensor heartrateSensor) sensorConnected,
+  }) {
+    return sensorConnected(heartrateSensor);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? searchStarted,
+    TResult Function()? searchStopped,
+    TResult Function()? invokedDisconnect,
+    TResult Function(Sensor heartrateSensor)? invokedPairing,
+    TResult Function(Sensor heartrateSensor, int bpm)? valueTransmitted,
+    TResult Function(Sensor heartrateSensor)? sensorConnected,
+    required TResult orElse(),
+  }) {
+    if (sensorConnected != null) {
+      return sensorConnected(heartrateSensor);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SearchStarted value) searchStarted,
+    required TResult Function(_SearchStopped value) searchStopped,
+    required TResult Function(_InvokedDisconnect value) invokedDisconnect,
+    required TResult Function(_InvokedPairing value) invokedPairing,
+    required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+  }) {
+    return sensorConnected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SearchStarted value)? searchStarted,
+    TResult Function(_SearchStopped value)? searchStopped,
+    TResult Function(_InvokedDisconnect value)? invokedDisconnect,
+    TResult Function(_InvokedPairing value)? invokedPairing,
+    TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    required TResult orElse(),
+  }) {
+    if (sensorConnected != null) {
+      return sensorConnected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SensorConnected implements HeartrateEvent {
+  const factory _SensorConnected(Sensor heartrateSensor) = _$_SensorConnected;
+
+  Sensor get heartrateSensor => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$SensorConnectedCopyWith<_SensorConnected> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -637,8 +877,9 @@ class _$HeartrateStateTearOff {
     return const _Searching();
   }
 
-  _Connected connected(int bpm) {
+  _Connected connected(Sensor heartrateSensor, int? bpm) {
     return _Connected(
+      heartrateSensor,
       bpm,
     );
   }
@@ -654,7 +895,7 @@ mixin _$HeartrateState {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int bpm) connected,
+    required TResult Function(Sensor heartrateSensor, int? bpm) connected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -662,7 +903,7 @@ mixin _$HeartrateState {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int bpm)? connected,
+    TResult Function(Sensor heartrateSensor, int? bpm)? connected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -742,7 +983,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int bpm) connected,
+    required TResult Function(Sensor heartrateSensor, int? bpm) connected,
   }) {
     return initial();
   }
@@ -753,7 +994,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int bpm)? connected,
+    TResult Function(Sensor heartrateSensor, int? bpm)? connected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -836,7 +1077,7 @@ class _$_Disconnected implements _Disconnected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int bpm) connected,
+    required TResult Function(Sensor heartrateSensor, int? bpm) connected,
   }) {
     return disconnected();
   }
@@ -847,7 +1088,7 @@ class _$_Disconnected implements _Disconnected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int bpm)? connected,
+    TResult Function(Sensor heartrateSensor, int? bpm)? connected,
     required TResult orElse(),
   }) {
     if (disconnected != null) {
@@ -928,7 +1169,7 @@ class _$_Searching implements _Searching {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int bpm) connected,
+    required TResult Function(Sensor heartrateSensor, int? bpm) connected,
   }) {
     return searching();
   }
@@ -939,7 +1180,7 @@ class _$_Searching implements _Searching {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int bpm)? connected,
+    TResult Function(Sensor heartrateSensor, int? bpm)? connected,
     required TResult orElse(),
   }) {
     if (searching != null) {
@@ -984,7 +1225,9 @@ abstract class _$ConnectedCopyWith<$Res> {
   factory _$ConnectedCopyWith(
           _Connected value, $Res Function(_Connected) then) =
       __$ConnectedCopyWithImpl<$Res>;
-  $Res call({int bpm});
+  $Res call({Sensor heartrateSensor, int? bpm});
+
+  $SensorCopyWith<$Res> get heartrateSensor;
 }
 
 /// @nodoc
@@ -998,41 +1241,60 @@ class __$ConnectedCopyWithImpl<$Res> extends _$HeartrateStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object? heartrateSensor = freezed,
     Object? bpm = freezed,
   }) {
     return _then(_Connected(
+      heartrateSensor == freezed
+          ? _value.heartrateSensor
+          : heartrateSensor // ignore: cast_nullable_to_non_nullable
+              as Sensor,
       bpm == freezed
           ? _value.bpm
           : bpm // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
+  }
+
+  @override
+  $SensorCopyWith<$Res> get heartrateSensor {
+    return $SensorCopyWith<$Res>(_value.heartrateSensor, (value) {
+      return _then(_value.copyWith(heartrateSensor: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$_Connected implements _Connected {
-  const _$_Connected(this.bpm);
+  const _$_Connected(this.heartrateSensor, this.bpm);
 
   @override
-  final int bpm;
+  final Sensor heartrateSensor;
+  @override
+  final int? bpm;
 
   @override
   String toString() {
-    return 'HeartrateState.connected(bpm: $bpm)';
+    return 'HeartrateState.connected(heartrateSensor: $heartrateSensor, bpm: $bpm)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Connected &&
+            (identical(other.heartrateSensor, heartrateSensor) ||
+                const DeepCollectionEquality()
+                    .equals(other.heartrateSensor, heartrateSensor)) &&
             (identical(other.bpm, bpm) ||
                 const DeepCollectionEquality().equals(other.bpm, bpm)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(bpm);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(heartrateSensor) ^
+      const DeepCollectionEquality().hash(bpm);
 
   @JsonKey(ignore: true)
   @override
@@ -1045,9 +1307,9 @@ class _$_Connected implements _Connected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int bpm) connected,
+    required TResult Function(Sensor heartrateSensor, int? bpm) connected,
   }) {
-    return connected(bpm);
+    return connected(heartrateSensor, bpm);
   }
 
   @override
@@ -1056,11 +1318,11 @@ class _$_Connected implements _Connected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int bpm)? connected,
+    TResult Function(Sensor heartrateSensor, int? bpm)? connected,
     required TResult orElse(),
   }) {
     if (connected != null) {
-      return connected(bpm);
+      return connected(heartrateSensor, bpm);
     }
     return orElse();
   }
@@ -1093,9 +1355,10 @@ class _$_Connected implements _Connected {
 }
 
 abstract class _Connected implements HeartrateState {
-  const factory _Connected(int bpm) = _$_Connected;
+  const factory _Connected(Sensor heartrateSensor, int? bpm) = _$_Connected;
 
-  int get bpm => throw _privateConstructorUsedError;
+  Sensor get heartrateSensor => throw _privateConstructorUsedError;
+  int? get bpm => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ConnectedCopyWith<_Connected> get copyWith =>
       throw _privateConstructorUsedError;

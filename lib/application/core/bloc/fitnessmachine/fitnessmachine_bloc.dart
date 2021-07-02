@@ -9,7 +9,7 @@ part 'fitnessmachine_bloc.freezed.dart';
 
 class FitnessmachineBloc
     extends Bloc<FitnessmachineEvent, FitnessmachineState> {
-  FitnessmachineBloc() : super(_Initial());
+  FitnessmachineBloc() : super(const _Initial());
 
   @override
   Stream<FitnessmachineState> mapEventToState(

@@ -8,7 +8,7 @@ part 'cadence_state.dart';
 part 'cadence_bloc.freezed.dart';
 
 class CadenceBloc extends Bloc<CadenceEvent, CadenceState> {
-  CadenceBloc() : super(_Initial());
+  CadenceBloc() : super(const _Initial());
 
   @override
   Stream<CadenceState> mapEventToState(
