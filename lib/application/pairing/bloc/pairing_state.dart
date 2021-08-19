@@ -8,5 +8,6 @@ class PairingState with _$PairingState {
     required bool heartrateConnected,
     required bool fitnessmachineConnected,
   }) = _Pairing;
-  const factory PairingState.paired() = _Paired; //TODO has sensors
+  const factory PairingState.paired() =
+      _Paired; //TODO has sensors? Include sensors as reference in state
 }

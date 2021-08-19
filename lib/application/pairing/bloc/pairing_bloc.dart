@@ -54,81 +54,90 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   Stream<PairingState> mapEventToState(
     PairingEvent event,
   ) async* {
-    yield* event.map(pairingStarted: (e) async* {
-      heartrateBloc.add(const HeartrateEvent.searchStarted());
-      cadenceBloc.add(const CadenceEvent.searchStarted());
-      fitnessmachineBloc.add(const FitnessmachineEvent.searchStarted());
-      yield const PairingState.pairing(
-        cadenceConnected: false,
-        heartrateConnected: false,
-        fitnessmachineConnected: false,
-      );
-    }, pairingSkipped: (e) async* {
-      heartrateBloc.add(const HeartrateEvent.searchStopped());
-      cadenceBloc.add(const CadenceEvent.searchStopped());
-      fitnessmachineBloc.add(const FitnessmachineEvent.searchStopped());
-      yield const PairingState.initial(); // TODO skipped
-    }, cadenceConnected: (e) async* {
-      yield state.maybeMap(pairing: (s) {
-        if (s.fitnessmachineConnected && s.heartrateConnected) {
-          return const PairingState.paired();
-        } else {
-          return s.copyWith(cadenceConnected: true);
-        }
-      }, orElse: () {
-        return const PairingState.paired();
-      });
-    }, heartrateConnected: (e) async* {
-      yield state.maybeMap(pairing: (s) {
-        if (s.fitnessmachineConnected && s.cadenceConnected) {
-          return const PairingState.paired();
-        } else {
-          return s.copyWith(heartrateConnected: true);
-        }
-      }, orElse: () {
-        return const PairingState.paired();
-      });
-    }, fitnessmachineConnected: (e) async* {
-      yield state.maybeMap(pairing: (s) {
-        if (s.cadenceConnected && s.heartrateConnected) {
-          return const PairingState.paired();
-        } else {
-          return s.copyWith(fitnessmachineConnected: true);
-        }
-      }, orElse: () {
-        return const PairingState.paired();
-      });
-    }, cadenceDisconnected: (e) async* {
-      yield state.maybeMap(pairing: (s) {
-        return s.copyWith(cadenceConnected: false);
-      }, orElse: () {
-        return const PairingState.pairing(
+    yield* event.map(
+      pairingStarted: (e) async* {
+        heartrateBloc.add(const HeartrateEvent.searchStarted());
+        cadenceBloc.add(const CadenceEvent.searchStarted());
+        fitnessmachineBloc.add(const FitnessmachineEvent.searchStarted());
+        yield const PairingState.pairing(
           cadenceConnected: false,
           heartrateConnected: false,
           fitnessmachineConnected: false,
         );
-      });
-    }, heartrateDisconnected: (e) async* {
-      yield state.maybeMap(pairing: (s) {
-        return s.copyWith(heartrateConnected: false);
-      }, orElse: () {
-        return const PairingState.pairing(
-          cadenceConnected: false,
-          heartrateConnected: false,
-          fitnessmachineConnected: false,
-        );
-      });
-    }, fitnessmachineDisconnected: (e) async* {
-      yield state.maybeMap(pairing: (s) {
-        return s.copyWith(fitnessmachineConnected: false);
-      }, orElse: () {
-        return const PairingState.pairing(
-          cadenceConnected: false,
-          heartrateConnected: false,
-          fitnessmachineConnected: false,
-        );
-      });
-    });
+      },
+      pairingSkipped: (e) async* {
+        heartrateBloc.add(const HeartrateEvent.searchStopped());
+        cadenceBloc.add(const CadenceEvent.searchStopped());
+        fitnessmachineBloc.add(const FitnessmachineEvent.searchStopped());
+        yield const PairingState.initial(); // TODO skipped
+      },
+      cadenceConnected: (e) async* {
+        yield state.maybeMap(pairing: (s) {
+          if (s.fitnessmachineConnected && s.heartrateConnected) {
+            return const PairingState.paired();
+          } else {
+            return s.copyWith(cadenceConnected: true);
+          }
+        }, orElse: () {
+          return const PairingState.paired();
+        });
+      },
+      heartrateConnected: (e) async* {
+        yield state.maybeMap(pairing: (s) {
+          if (s.fitnessmachineConnected && s.cadenceConnected) {
+            return const PairingState.paired();
+          } else {
+            return s.copyWith(heartrateConnected: true);
+          }
+        }, orElse: () {
+          return const PairingState.paired();
+        });
+      },
+      fitnessmachineConnected: (e) async* {
+        yield state.maybeMap(pairing: (s) {
+          if (s.cadenceConnected && s.heartrateConnected) {
+            return const PairingState.paired();
+          } else {
+            return s.copyWith(fitnessmachineConnected: true);
+          }
+        }, orElse: () {
+          return const PairingState.paired();
+        });
+      },
+      cadenceDisconnected: (e) async* {
+        yield state.maybeMap(pairing: (s) {
+          return s.copyWith(cadenceConnected: false);
+        }, orElse: () {
+          return const PairingState.pairing(
+            cadenceConnected: false,
+            heartrateConnected: false,
+            fitnessmachineConnected: false,
+          );
+        });
+      },
+      heartrateDisconnected: (e) async* {
+        yield state.maybeMap(pairing: (s) {
+          return s.copyWith(heartrateConnected: false);
+        }, orElse: () {
+          return const PairingState.pairing(
+            cadenceConnected: false,
+            heartrateConnected: false,
+            fitnessmachineConnected: false,
+          );
+        });
+      },
+      fitnessmachineDisconnected: (e) async* {
+        yield state.maybeMap(pairing: (s) {
+          return s.copyWith(fitnessmachineConnected: false);
+        }, orElse: () {
+          return const PairingState.pairing(
+            cadenceConnected: false,
+            heartrateConnected: false,
+            fitnessmachineConnected: false,
+          );
+        });
+      },
+    );
   }
 
   @override
