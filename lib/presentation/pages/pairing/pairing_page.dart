@@ -48,14 +48,16 @@ class _PageWidget extends StatelessWidget {
                   BlocProvider.of<PairingBloc>(context)
                       .add(const PairingEvent.pairingStarted());
                 },
-                child: const Text("data")),
-            SizedBox(height: 50),
+                child: const Text("Start pairing")),
+            const SizedBox(height: 50),
             BlocBuilder<HeartrateBloc, HeartrateState>(
                 builder: (context, state) {
               return state.maybeMap(connected: (e) {
-                return Text("${e.bpm} BPM");
+                return e.bpm != null
+                    ? Text("${e.bpm} BPM")
+                    : const Text("Connected");
               }, orElse: () {
-                return Text("NO VALUE");
+                return const Text("Not Connected");
               });
             })
           ],

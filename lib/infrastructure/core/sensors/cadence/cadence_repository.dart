@@ -34,9 +34,8 @@ class CadenceRepository implements ICadenceRepository {
             (service) => cadenceSensorAdvertisementServices
                 .contains(service.uuid.toString()));
     final BluetoothCharacteristic characteristic = service.characteristics
-        .firstWhere((characteristic) => characteristic.uuid
-            .toString()
-            .startsWith(cadenceRpmCharacteristic));
+        .firstWhere((characteristic) =>
+            characteristic.uuid.toString() == cadenceRpmCharacteristic);
     await characteristic.setNotifyValue(true);
     sensorSubscription = characteristic.value.listen((List<int> value) {
       log("value is $value");
