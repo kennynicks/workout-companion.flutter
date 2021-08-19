@@ -28,14 +28,28 @@ class _$CadenceEventTearOff {
     return const _InvokedDisconnect();
   }
 
-  _InvokedPairing invokedPairing() {
-    return const _InvokedPairing();
+  _InvokedPairing invokedPairing(Sensor cadenceSensor) {
+    return _InvokedPairing(
+      cadenceSensor,
+    );
   }
 
-  _ValueTransmitted valueTransmitted(int cadence) {
+  _ValueTransmitted valueTransmitted(
+      CadenceRepository cadenceRepository, int rpm) {
     return _ValueTransmitted(
-      cadence,
+      cadenceRepository,
+      rpm,
     );
+  }
+
+  _SensorConnected sensorConnected(Sensor cadenceSensor) {
+    return _SensorConnected(
+      cadenceSensor,
+    );
+  }
+
+  _SensorDisconnected sensorDisconnected() {
+    return const _SensorDisconnected();
   }
 }
 
@@ -49,8 +63,11 @@ mixin _$CadenceEvent {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int cadence) valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,8 +75,11 @@ mixin _$CadenceEvent {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int cadence)? valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,6 +90,8 @@ mixin _$CadenceEvent {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +101,8 @@ mixin _$CadenceEvent {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -143,8 +167,11 @@ class _$_SearchStarted implements _SearchStarted {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int cadence) valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
   }) {
     return searchStarted();
   }
@@ -155,8 +182,11 @@ class _$_SearchStarted implements _SearchStarted {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int cadence)? valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (searchStarted != null) {
@@ -173,6 +203,8 @@ class _$_SearchStarted implements _SearchStarted {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
   }) {
     return searchStarted(this);
   }
@@ -185,6 +217,8 @@ class _$_SearchStarted implements _SearchStarted {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (searchStarted != null) {
@@ -241,8 +275,11 @@ class _$_SearchStopped implements _SearchStopped {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int cadence) valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
   }) {
     return searchStopped();
   }
@@ -253,8 +290,11 @@ class _$_SearchStopped implements _SearchStopped {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int cadence)? valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (searchStopped != null) {
@@ -271,6 +311,8 @@ class _$_SearchStopped implements _SearchStopped {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
   }) {
     return searchStopped(this);
   }
@@ -283,6 +325,8 @@ class _$_SearchStopped implements _SearchStopped {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (searchStopped != null) {
@@ -339,8 +383,11 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int cadence) valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
   }) {
     return invokedDisconnect();
   }
@@ -351,8 +398,11 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int cadence)? valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (invokedDisconnect != null) {
@@ -369,6 +419,8 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
   }) {
     return invokedDisconnect(this);
   }
@@ -381,6 +433,8 @@ class _$_InvokedDisconnect implements _InvokedDisconnect {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (invokedDisconnect != null) {
@@ -399,6 +453,9 @@ abstract class _$InvokedPairingCopyWith<$Res> {
   factory _$InvokedPairingCopyWith(
           _InvokedPairing value, $Res Function(_InvokedPairing) then) =
       __$InvokedPairingCopyWithImpl<$Res>;
+  $Res call({Sensor cadenceSensor});
+
+  $SensorCopyWith<$Res> get cadenceSensor;
 }
 
 /// @nodoc
@@ -411,25 +468,57 @@ class __$InvokedPairingCopyWithImpl<$Res>
 
   @override
   _InvokedPairing get _value => super._value as _InvokedPairing;
+
+  @override
+  $Res call({
+    Object? cadenceSensor = freezed,
+  }) {
+    return _then(_InvokedPairing(
+      cadenceSensor == freezed
+          ? _value.cadenceSensor
+          : cadenceSensor // ignore: cast_nullable_to_non_nullable
+              as Sensor,
+    ));
+  }
+
+  @override
+  $SensorCopyWith<$Res> get cadenceSensor {
+    return $SensorCopyWith<$Res>(_value.cadenceSensor, (value) {
+      return _then(_value.copyWith(cadenceSensor: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_InvokedPairing implements _InvokedPairing {
-  const _$_InvokedPairing();
+  const _$_InvokedPairing(this.cadenceSensor);
+
+  @override
+  final Sensor cadenceSensor;
 
   @override
   String toString() {
-    return 'CadenceEvent.invokedPairing()';
+    return 'CadenceEvent.invokedPairing(cadenceSensor: $cadenceSensor)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _InvokedPairing);
+    return identical(this, other) ||
+        (other is _InvokedPairing &&
+            (identical(other.cadenceSensor, cadenceSensor) ||
+                const DeepCollectionEquality()
+                    .equals(other.cadenceSensor, cadenceSensor)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(cadenceSensor);
+
+  @JsonKey(ignore: true)
+  @override
+  _$InvokedPairingCopyWith<_InvokedPairing> get copyWith =>
+      __$InvokedPairingCopyWithImpl<_InvokedPairing>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -437,10 +526,13 @@ class _$_InvokedPairing implements _InvokedPairing {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int cadence) valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
   }) {
-    return invokedPairing();
+    return invokedPairing(cadenceSensor);
   }
 
   @override
@@ -449,12 +541,15 @@ class _$_InvokedPairing implements _InvokedPairing {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int cadence)? valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (invokedPairing != null) {
-      return invokedPairing();
+      return invokedPairing(cadenceSensor);
     }
     return orElse();
   }
@@ -467,6 +562,8 @@ class _$_InvokedPairing implements _InvokedPairing {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
   }) {
     return invokedPairing(this);
   }
@@ -479,6 +576,8 @@ class _$_InvokedPairing implements _InvokedPairing {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (invokedPairing != null) {
@@ -489,7 +588,12 @@ class _$_InvokedPairing implements _InvokedPairing {
 }
 
 abstract class _InvokedPairing implements CadenceEvent {
-  const factory _InvokedPairing() = _$_InvokedPairing;
+  const factory _InvokedPairing(Sensor cadenceSensor) = _$_InvokedPairing;
+
+  Sensor get cadenceSensor => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$InvokedPairingCopyWith<_InvokedPairing> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -497,7 +601,7 @@ abstract class _$ValueTransmittedCopyWith<$Res> {
   factory _$ValueTransmittedCopyWith(
           _ValueTransmitted value, $Res Function(_ValueTransmitted) then) =
       __$ValueTransmittedCopyWithImpl<$Res>;
-  $Res call({int cadence});
+  $Res call({CadenceRepository cadenceRepository, int rpm});
 }
 
 /// @nodoc
@@ -513,12 +617,17 @@ class __$ValueTransmittedCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? cadence = freezed,
+    Object? cadenceRepository = freezed,
+    Object? rpm = freezed,
   }) {
     return _then(_ValueTransmitted(
-      cadence == freezed
-          ? _value.cadence
-          : cadence // ignore: cast_nullable_to_non_nullable
+      cadenceRepository == freezed
+          ? _value.cadenceRepository
+          : cadenceRepository // ignore: cast_nullable_to_non_nullable
+              as CadenceRepository,
+      rpm == freezed
+          ? _value.rpm
+          : rpm // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -527,27 +636,34 @@ class __$ValueTransmittedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ValueTransmitted implements _ValueTransmitted {
-  const _$_ValueTransmitted(this.cadence);
+  const _$_ValueTransmitted(this.cadenceRepository, this.rpm);
 
   @override
-  final int cadence;
+  final CadenceRepository cadenceRepository;
+  @override
+  final int rpm;
 
   @override
   String toString() {
-    return 'CadenceEvent.valueTransmitted(cadence: $cadence)';
+    return 'CadenceEvent.valueTransmitted(cadenceRepository: $cadenceRepository, rpm: $rpm)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ValueTransmitted &&
-            (identical(other.cadence, cadence) ||
-                const DeepCollectionEquality().equals(other.cadence, cadence)));
+            (identical(other.cadenceRepository, cadenceRepository) ||
+                const DeepCollectionEquality()
+                    .equals(other.cadenceRepository, cadenceRepository)) &&
+            (identical(other.rpm, rpm) ||
+                const DeepCollectionEquality().equals(other.rpm, rpm)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(cadence);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(cadenceRepository) ^
+      const DeepCollectionEquality().hash(rpm);
 
   @JsonKey(ignore: true)
   @override
@@ -560,10 +676,13 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     required TResult Function() searchStarted,
     required TResult Function() searchStopped,
     required TResult Function() invokedDisconnect,
-    required TResult Function() invokedPairing,
-    required TResult Function(int cadence) valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
   }) {
-    return valueTransmitted(cadence);
+    return valueTransmitted(cadenceRepository, rpm);
   }
 
   @override
@@ -572,12 +691,15 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     TResult Function()? searchStarted,
     TResult Function()? searchStopped,
     TResult Function()? invokedDisconnect,
-    TResult Function()? invokedPairing,
-    TResult Function(int cadence)? valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (valueTransmitted != null) {
-      return valueTransmitted(cadence);
+      return valueTransmitted(cadenceRepository, rpm);
     }
     return orElse();
   }
@@ -590,6 +712,8 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     required TResult Function(_InvokedDisconnect value) invokedDisconnect,
     required TResult Function(_InvokedPairing value) invokedPairing,
     required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
   }) {
     return valueTransmitted(this);
   }
@@ -602,6 +726,8 @@ class _$_ValueTransmitted implements _ValueTransmitted {
     TResult Function(_InvokedDisconnect value)? invokedDisconnect,
     TResult Function(_InvokedPairing value)? invokedPairing,
     TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
     required TResult orElse(),
   }) {
     if (valueTransmitted != null) {
@@ -612,12 +738,270 @@ class _$_ValueTransmitted implements _ValueTransmitted {
 }
 
 abstract class _ValueTransmitted implements CadenceEvent {
-  const factory _ValueTransmitted(int cadence) = _$_ValueTransmitted;
+  const factory _ValueTransmitted(
+      CadenceRepository cadenceRepository, int rpm) = _$_ValueTransmitted;
 
-  int get cadence => throw _privateConstructorUsedError;
+  CadenceRepository get cadenceRepository => throw _privateConstructorUsedError;
+  int get rpm => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ValueTransmittedCopyWith<_ValueTransmitted> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SensorConnectedCopyWith<$Res> {
+  factory _$SensorConnectedCopyWith(
+          _SensorConnected value, $Res Function(_SensorConnected) then) =
+      __$SensorConnectedCopyWithImpl<$Res>;
+  $Res call({Sensor cadenceSensor});
+
+  $SensorCopyWith<$Res> get cadenceSensor;
+}
+
+/// @nodoc
+class __$SensorConnectedCopyWithImpl<$Res>
+    extends _$CadenceEventCopyWithImpl<$Res>
+    implements _$SensorConnectedCopyWith<$Res> {
+  __$SensorConnectedCopyWithImpl(
+      _SensorConnected _value, $Res Function(_SensorConnected) _then)
+      : super(_value, (v) => _then(v as _SensorConnected));
+
+  @override
+  _SensorConnected get _value => super._value as _SensorConnected;
+
+  @override
+  $Res call({
+    Object? cadenceSensor = freezed,
+  }) {
+    return _then(_SensorConnected(
+      cadenceSensor == freezed
+          ? _value.cadenceSensor
+          : cadenceSensor // ignore: cast_nullable_to_non_nullable
+              as Sensor,
+    ));
+  }
+
+  @override
+  $SensorCopyWith<$Res> get cadenceSensor {
+    return $SensorCopyWith<$Res>(_value.cadenceSensor, (value) {
+      return _then(_value.copyWith(cadenceSensor: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_SensorConnected implements _SensorConnected {
+  const _$_SensorConnected(this.cadenceSensor);
+
+  @override
+  final Sensor cadenceSensor;
+
+  @override
+  String toString() {
+    return 'CadenceEvent.sensorConnected(cadenceSensor: $cadenceSensor)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _SensorConnected &&
+            (identical(other.cadenceSensor, cadenceSensor) ||
+                const DeepCollectionEquality()
+                    .equals(other.cadenceSensor, cadenceSensor)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(cadenceSensor);
+
+  @JsonKey(ignore: true)
+  @override
+  _$SensorConnectedCopyWith<_SensorConnected> get copyWith =>
+      __$SensorConnectedCopyWithImpl<_SensorConnected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() searchStarted,
+    required TResult Function() searchStopped,
+    required TResult Function() invokedDisconnect,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
+  }) {
+    return sensorConnected(cadenceSensor);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? searchStarted,
+    TResult Function()? searchStopped,
+    TResult Function()? invokedDisconnect,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
+    required TResult orElse(),
+  }) {
+    if (sensorConnected != null) {
+      return sensorConnected(cadenceSensor);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SearchStarted value) searchStarted,
+    required TResult Function(_SearchStopped value) searchStopped,
+    required TResult Function(_InvokedDisconnect value) invokedDisconnect,
+    required TResult Function(_InvokedPairing value) invokedPairing,
+    required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
+  }) {
+    return sensorConnected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SearchStarted value)? searchStarted,
+    TResult Function(_SearchStopped value)? searchStopped,
+    TResult Function(_InvokedDisconnect value)? invokedDisconnect,
+    TResult Function(_InvokedPairing value)? invokedPairing,
+    TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
+    required TResult orElse(),
+  }) {
+    if (sensorConnected != null) {
+      return sensorConnected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SensorConnected implements CadenceEvent {
+  const factory _SensorConnected(Sensor cadenceSensor) = _$_SensorConnected;
+
+  Sensor get cadenceSensor => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$SensorConnectedCopyWith<_SensorConnected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SensorDisconnectedCopyWith<$Res> {
+  factory _$SensorDisconnectedCopyWith(
+          _SensorDisconnected value, $Res Function(_SensorDisconnected) then) =
+      __$SensorDisconnectedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SensorDisconnectedCopyWithImpl<$Res>
+    extends _$CadenceEventCopyWithImpl<$Res>
+    implements _$SensorDisconnectedCopyWith<$Res> {
+  __$SensorDisconnectedCopyWithImpl(
+      _SensorDisconnected _value, $Res Function(_SensorDisconnected) _then)
+      : super(_value, (v) => _then(v as _SensorDisconnected));
+
+  @override
+  _SensorDisconnected get _value => super._value as _SensorDisconnected;
+}
+
+/// @nodoc
+
+class _$_SensorDisconnected implements _SensorDisconnected {
+  const _$_SensorDisconnected();
+
+  @override
+  String toString() {
+    return 'CadenceEvent.sensorDisconnected()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _SensorDisconnected);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() searchStarted,
+    required TResult Function() searchStopped,
+    required TResult Function() invokedDisconnect,
+    required TResult Function(Sensor cadenceSensor) invokedPairing,
+    required TResult Function(CadenceRepository cadenceRepository, int rpm)
+        valueTransmitted,
+    required TResult Function(Sensor cadenceSensor) sensorConnected,
+    required TResult Function() sensorDisconnected,
+  }) {
+    return sensorDisconnected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? searchStarted,
+    TResult Function()? searchStopped,
+    TResult Function()? invokedDisconnect,
+    TResult Function(Sensor cadenceSensor)? invokedPairing,
+    TResult Function(CadenceRepository cadenceRepository, int rpm)?
+        valueTransmitted,
+    TResult Function(Sensor cadenceSensor)? sensorConnected,
+    TResult Function()? sensorDisconnected,
+    required TResult orElse(),
+  }) {
+    if (sensorDisconnected != null) {
+      return sensorDisconnected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_SearchStarted value) searchStarted,
+    required TResult Function(_SearchStopped value) searchStopped,
+    required TResult Function(_InvokedDisconnect value) invokedDisconnect,
+    required TResult Function(_InvokedPairing value) invokedPairing,
+    required TResult Function(_ValueTransmitted value) valueTransmitted,
+    required TResult Function(_SensorConnected value) sensorConnected,
+    required TResult Function(_SensorDisconnected value) sensorDisconnected,
+  }) {
+    return sensorDisconnected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_SearchStarted value)? searchStarted,
+    TResult Function(_SearchStopped value)? searchStopped,
+    TResult Function(_InvokedDisconnect value)? invokedDisconnect,
+    TResult Function(_InvokedPairing value)? invokedPairing,
+    TResult Function(_ValueTransmitted value)? valueTransmitted,
+    TResult Function(_SensorConnected value)? sensorConnected,
+    TResult Function(_SensorDisconnected value)? sensorDisconnected,
+    required TResult orElse(),
+  }) {
+    if (sensorDisconnected != null) {
+      return sensorDisconnected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SensorDisconnected implements CadenceEvent {
+  const factory _SensorDisconnected() = _$_SensorDisconnected;
 }
 
 /// @nodoc
@@ -636,9 +1020,10 @@ class _$CadenceStateTearOff {
     return const _Searching();
   }
 
-  _Connected connected(int? cadence) {
+  _Connected connected(CadenceRepository cadenceRepository, int? rpm) {
     return _Connected(
-      cadence,
+      cadenceRepository,
+      rpm,
     );
   }
 }
@@ -653,7 +1038,8 @@ mixin _$CadenceState {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int? cadence) connected,
+    required TResult Function(CadenceRepository cadenceRepository, int? rpm)
+        connected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -661,7 +1047,7 @@ mixin _$CadenceState {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int? cadence)? connected,
+    TResult Function(CadenceRepository cadenceRepository, int? rpm)? connected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -740,7 +1126,8 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int? cadence) connected,
+    required TResult Function(CadenceRepository cadenceRepository, int? rpm)
+        connected,
   }) {
     return initial();
   }
@@ -751,7 +1138,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int? cadence)? connected,
+    TResult Function(CadenceRepository cadenceRepository, int? rpm)? connected,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -833,7 +1220,8 @@ class _$_Disconnected implements _Disconnected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int? cadence) connected,
+    required TResult Function(CadenceRepository cadenceRepository, int? rpm)
+        connected,
   }) {
     return disconnected();
   }
@@ -844,7 +1232,7 @@ class _$_Disconnected implements _Disconnected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int? cadence)? connected,
+    TResult Function(CadenceRepository cadenceRepository, int? rpm)? connected,
     required TResult orElse(),
   }) {
     if (disconnected != null) {
@@ -925,7 +1313,8 @@ class _$_Searching implements _Searching {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int? cadence) connected,
+    required TResult Function(CadenceRepository cadenceRepository, int? rpm)
+        connected,
   }) {
     return searching();
   }
@@ -936,7 +1325,7 @@ class _$_Searching implements _Searching {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int? cadence)? connected,
+    TResult Function(CadenceRepository cadenceRepository, int? rpm)? connected,
     required TResult orElse(),
   }) {
     if (searching != null) {
@@ -981,7 +1370,7 @@ abstract class _$ConnectedCopyWith<$Res> {
   factory _$ConnectedCopyWith(
           _Connected value, $Res Function(_Connected) then) =
       __$ConnectedCopyWithImpl<$Res>;
-  $Res call({int? cadence});
+  $Res call({CadenceRepository cadenceRepository, int? rpm});
 }
 
 /// @nodoc
@@ -995,12 +1384,17 @@ class __$ConnectedCopyWithImpl<$Res> extends _$CadenceStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? cadence = freezed,
+    Object? cadenceRepository = freezed,
+    Object? rpm = freezed,
   }) {
     return _then(_Connected(
-      cadence == freezed
-          ? _value.cadence
-          : cadence // ignore: cast_nullable_to_non_nullable
+      cadenceRepository == freezed
+          ? _value.cadenceRepository
+          : cadenceRepository // ignore: cast_nullable_to_non_nullable
+              as CadenceRepository,
+      rpm == freezed
+          ? _value.rpm
+          : rpm // ignore: cast_nullable_to_non_nullable
               as int?,
     ));
   }
@@ -1009,27 +1403,34 @@ class __$ConnectedCopyWithImpl<$Res> extends _$CadenceStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Connected implements _Connected {
-  const _$_Connected(this.cadence);
+  const _$_Connected(this.cadenceRepository, this.rpm);
 
   @override
-  final int? cadence;
+  final CadenceRepository cadenceRepository;
+  @override
+  final int? rpm;
 
   @override
   String toString() {
-    return 'CadenceState.connected(cadence: $cadence)';
+    return 'CadenceState.connected(cadenceRepository: $cadenceRepository, rpm: $rpm)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Connected &&
-            (identical(other.cadence, cadence) ||
-                const DeepCollectionEquality().equals(other.cadence, cadence)));
+            (identical(other.cadenceRepository, cadenceRepository) ||
+                const DeepCollectionEquality()
+                    .equals(other.cadenceRepository, cadenceRepository)) &&
+            (identical(other.rpm, rpm) ||
+                const DeepCollectionEquality().equals(other.rpm, rpm)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(cadence);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(cadenceRepository) ^
+      const DeepCollectionEquality().hash(rpm);
 
   @JsonKey(ignore: true)
   @override
@@ -1042,9 +1443,10 @@ class _$_Connected implements _Connected {
     required TResult Function() initial,
     required TResult Function() disconnected,
     required TResult Function() searching,
-    required TResult Function(int? cadence) connected,
+    required TResult Function(CadenceRepository cadenceRepository, int? rpm)
+        connected,
   }) {
-    return connected(cadence);
+    return connected(cadenceRepository, rpm);
   }
 
   @override
@@ -1053,11 +1455,11 @@ class _$_Connected implements _Connected {
     TResult Function()? initial,
     TResult Function()? disconnected,
     TResult Function()? searching,
-    TResult Function(int? cadence)? connected,
+    TResult Function(CadenceRepository cadenceRepository, int? rpm)? connected,
     required TResult orElse(),
   }) {
     if (connected != null) {
-      return connected(cadence);
+      return connected(cadenceRepository, rpm);
     }
     return orElse();
   }
@@ -1090,9 +1492,11 @@ class _$_Connected implements _Connected {
 }
 
 abstract class _Connected implements CadenceState {
-  const factory _Connected(int? cadence) = _$_Connected;
+  const factory _Connected(CadenceRepository cadenceRepository, int? rpm) =
+      _$_Connected;
 
-  int? get cadence => throw _privateConstructorUsedError;
+  CadenceRepository get cadenceRepository => throw _privateConstructorUsedError;
+  int? get rpm => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$ConnectedCopyWith<_Connected> get copyWith =>
       throw _privateConstructorUsedError;
