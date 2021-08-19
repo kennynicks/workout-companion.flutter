@@ -5,7 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mutex/mutex.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/bluetooth_failure.dart';
+import 'package:workout_companion_flutter/domain/core/sensors/cadence/constants.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/heartrate/constants.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/i_sensor_repository.dart';
 import 'package:workout_companion_flutter/domain/core/sensors/sensor_type.dart';
@@ -17,10 +19,15 @@ class SensorRepository implements ISensorRepository {
   final FlutterBlue flutterBlue;
   StreamController<List<Sensor>> _sensorStream;
   List<Sensor> lastSensorScan = List.empty();
-  bool _isScanning = false;
+  final _scanLock = Mutex();
+  bool _scanInProgress = false;
 
   SensorRepository({required this.flutterBlue})
-      : _sensorStream = StreamController<List<Sensor>>.broadcast();
+      : _sensorStream = StreamController<List<Sensor>>.broadcast() {
+    flutterBlue.isScanning.listen((isScanning) {
+      log("flutterBlue.isScanning: $isScanning");
+    });
+  }
 
   @override
   Future<Either<BluetoothFailure, void>> pairDevice(Sensor sensor) async {
@@ -33,7 +40,7 @@ class SensorRepository implements ISensorRepository {
     try {
       await sensor.bluetoothDevice.connect();
     } catch (e) {
-      log(("platform exception: $e"));
+      log("platform exception: $e");
     }
     return right(null);
   }
@@ -57,7 +64,6 @@ class SensorRepository implements ISensorRepository {
 
   @override
   Future<Either<BluetoothFailure, void>> stopScan() async {
-    // _isScanning = false;
     if (!_sensorStream.isClosed) {
       log("closing 2");
       await _sensorStream.close();
@@ -67,27 +73,38 @@ class SensorRepository implements ISensorRepository {
   }
 
   Future<Stream<List<Sensor>>> get sensorStream async {
-    if (!_isScanning) {
-      // _isScanning = true;
-      log("starting scan");
-      await _startScan();
-    } else {
-      log("scan already in progress");
-      _sensorStream.add(lastSensorScan);
+    await _scanLock.acquire();
+    try {
+      if (!_scanInProgress) {
+        log("starting scan");
+        await _startScan();
+      } else {
+        log("scan already in progress");
+        _sensorStream.add(lastSensorScan);
+      }
+    } finally {
+      _scanLock.release();
     }
+
     return _sensorStream.stream;
   }
 
   Future _startScan() async {
+    _scanInProgress = true;
     await flutterBlue.stopScan();
     final List<String> services = [
-      ...CADENCE_SENSOR_ADVERTISEMENT_SERVICES,
+      ...cadenceSensorAdvertisementServices,
       ...heartrateSensorAdvertisementServices,
       ...FITNESS_MACHINE_SENSOR_ADVERTISEMENT_SERVICES
     ];
-    flutterBlue.startScan(
+    flutterBlue
+        .startScan(
       withServices: services.map((e) => Guid(e)).toList(),
-    );
+    )
+        .whenComplete(() {
+      _scanInProgress = false;
+      log("scan is stopped");
+    });
     // _isScanning = true;
     log("_sensorStream.isClosed 1: ${_sensorStream.isClosed}");
     if (_sensorStream.isClosed) {
@@ -107,11 +124,6 @@ class SensorRepository implements ISensorRepository {
         }
       },
     );
-    flutterBlue.stopScan(); //TODO check this
-    flutterBlue.isScanning.listen((isScanning) {
-      log("flutterBlue.isScanning: $isScanning");
-      _isScanning = isScanning;
-    });
   }
 
   @override
