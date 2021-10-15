@@ -9,8 +9,7 @@ class Sensor {
   List<Service> services = List.empty();
   BluetoothDevice btDevice;
 
-  final StreamController<ConnectionEvent> _stateStreamController =
-      StreamController<ConnectionEvent>();
+  final StreamController<ConnectionEvent> _stateStreamController = StreamController<ConnectionEvent>();
   Stream<ConnectionEvent>? _stateStream;
 
   Stream<ConnectionEvent> get stateStream {
@@ -27,11 +26,11 @@ class ConnectionEvent {
 
 enum ConnectionState { connected, disconnected }
 
-enum ServiceTypes { heartrate }
+enum ServiceType { heartrate }
 
 abstract class Service<T> {
   String guid;
-  ServiceTypes type;
+  ServiceType type;
   Service({required this.guid, required this.type});
 
   final StreamController<T> _streamController = StreamController<T>();
