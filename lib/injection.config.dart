@@ -4,17 +4,11 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:flutter_blue/flutter_blue.dart' as _i4;
+import 'package:flutter_blue/flutter_blue.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import 'application/core/bloc/cadence/cadence_bloc.dart' as _i7;
-import 'application/core/bloc/fitnessmachine/fitnessmachine_bloc.dart' as _i3;
-import 'application/core/bloc/heartrate/heartrate_bloc.dart' as _i8;
-import 'application/pairing/bloc/pairing_bloc.dart' as _i9;
-import 'domain/core/sensors/i_sensor_repository.dart' as _i5;
-import 'infrastructure/core/sensors/sensor_repository.dart' as _i6;
-import 'injection.dart' as _i10; // ignore_for_file: unnecessary_lambdas
+import 'injection.dart' as _i4; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -22,19 +16,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final registerModule = _$RegisterModule();
-  gh.singleton<_i3.FitnessmachineBloc>(_i3.FitnessmachineBloc());
-  gh.singleton<_i4.FlutterBlue>(registerModule.flutterBlue);
-  gh.singleton<_i5.ISensorRepository>(
-      _i6.SensorRepository(flutterBlue: get<_i4.FlutterBlue>()),
-      dispose: (i) => i.dispose());
-  gh.singleton<_i7.CadenceBloc>(_i7.CadenceBloc(get<_i5.ISensorRepository>()));
-  gh.singleton<_i8.HeartrateBloc>(
-      _i8.HeartrateBloc(get<_i5.ISensorRepository>()));
-  gh.singleton<_i9.PairingBloc>(_i9.PairingBloc(
-      cadenceBloc: get<_i7.CadenceBloc>(),
-      heartrateBloc: get<_i8.HeartrateBloc>(),
-      fitnessmachineBloc: get<_i3.FitnessmachineBloc>()));
+  gh.singleton<_i3.FlutterBlue>(registerModule.flutterBlue);
   return get;
 }
 
-class _$RegisterModule extends _i10.RegisterModule {}
+class _$RegisterModule extends _i4.RegisterModule {}

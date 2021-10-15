@@ -35,13 +35,13 @@ class AppRouter extends _i1.RootStackRouter {
       ];
 }
 
-class SplashPageRoute extends _i1.PageRouteInfo {
+class SplashPageRoute extends _i1.PageRouteInfo<void> {
   const SplashPageRoute() : super(name, path: '/');
 
   static const String name = 'SplashPageRoute';
 }
 
-class PairingPageRoute extends _i1.PageRouteInfo {
+class PairingPageRoute extends _i1.PageRouteInfo<void> {
   const PairingPageRoute() : super(name, path: '/pairing-page');
 
   static const String name = 'PairingPageRoute';
