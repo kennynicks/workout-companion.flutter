@@ -25,9 +25,25 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
 
   void onDiscoveredSensorsStream(List<Sensor> newDiscoveredSensors) {
     final bool discoveredSensorsChanged = discoveredSensors.equals(newDiscoveredSensors);
+    if (discoveredSensorsChanged) {
+      discoveredSensors.clear();
+      discoveredSensors.addAll(newDiscoveredSensors);
+      add(
+        PairingEvent.availableSensorChanged(availableSensors: discoveredSensors),
+      );
+    }
   }
 
-  void onConnectedSensorsStream(List<Sensor> newConnectedSensors) {}
+  void onConnectedSensorsStream(List<Sensor> newConnectedSensors) {
+    final bool connectedSensorsChanged = connectedSensors.equals(newConnectedSensors);
+    if (connectedSensorsChanged) {
+      connectedSensors.clear();
+      connectedSensors.addAll(newConnectedSensors);
+      add(
+        PairingEvent.connectedSensorChanged(connectedSensors: connectedSensors),
+      );
+    }
+  }
 
   @override
   Future<void> close() {
@@ -69,11 +85,11 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
         );
       },
       connectSensor: (e) async* {
-        //TODO trigger connect to sensor
+        sensorService.connectSensor(e.sensor);
         yield state;
       },
       disconnectSensor: (e) async* {
-        //TODO trigger disconnect to sensor
+        sensorService.disconnectSensor(e.sensor);
         yield state;
       },
     );
