@@ -64,36 +64,32 @@ class _PageWidget extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Connected",
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black,
-                      ),
+              child: Column(
+                children: [
+                  const Text(
+                    "Connected",
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.black,
                     ),
-                    getSensorList(),
-                  ],
-                ),
+                  ),
+                  getSensorList(),
+                ],
               ),
             ),
             const Divider(),
             Expanded(
-              child: Container(
-                child: Column(
-                  children: [
-                    const Text(
-                      "Available",
-                      style: TextStyle(
-                        fontSize: 25.0,
-                        color: Colors.black,
-                      ),
+              child: Column(
+                children: [
+                  const Text(
+                    "Available",
+                    style: TextStyle(
+                      fontSize: 25.0,
+                      color: Colors.black,
                     ),
-                    getSensorList(),
-                  ],
-                ),
+                  ),
+                  getSensorList(),
+                ],
               ),
             ),
           ],

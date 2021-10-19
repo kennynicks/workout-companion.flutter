@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import '../models/sensors/sensor.dart';
+import 'package:workout_companion_flutter/models/sensors/connection_event.dart';
+import 'package:workout_companion_flutter/models/sensors/sensor.dart';
 
 class SensorService {
   final List<Sensor> _sensors = List.empty();
@@ -27,10 +28,13 @@ class SensorService {
   }
 
   void onConnectionEvent(ConnectionEvent connectionEvent) {
-    if (connectionEvent.state == ConnectionState.disconnected) {
-      unregisterSensor(connectionEvent.sensor);
-      //TODO reconnect
-    }
+    connectionEvent.state.maybeWhen(
+      disconnected: () {
+        unregisterSensor(connectionEvent.sensor);
+        //TODO reconnect
+      },
+      orElse: () {},
+    );
   }
 
   void unregisterSensor(Sensor sensor) {
@@ -38,9 +42,13 @@ class SensorService {
     _sensorSubscriptions[sensor.id]?.cancel();
   }
 
-  void startScan() {}
+  void startScan() {
+    //TODO
+  }
 
-  void stopScan() {}
+  void stopScan() {
+    //TODO
+  }
 
   Future<void> connectSensor(Sensor sensor) async {
     await sensor.btDevice.connect(autoConnect: false);
@@ -48,5 +56,7 @@ class SensorService {
     _registerForConnectionStateEvents(sensor);
   }
 
-  void disconnectSensor(Sensor sensor) {}
+  void disconnectSensor(Sensor sensor) {
+    //TODO
+  }
 }

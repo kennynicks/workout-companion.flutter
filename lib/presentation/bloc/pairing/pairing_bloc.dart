@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
 import 'package:workout_companion_flutter/models/sensors/sensor.dart';
+import 'package:workout_companion_flutter/services/sensor_service.dart';
 
 part 'pairing_event.dart';
 part 'pairing_state.dart';
@@ -10,7 +13,28 @@ part 'pairing_bloc.freezed.dart';
 
 @singleton
 class PairingBloc extends Bloc<PairingEvent, PairingState> {
-  PairingBloc() : super(const _Initial());
+  final SensorService sensorService;
+  late final StreamSubscription _discoveredSensorsSubscription;
+  late final StreamSubscription _connectedSensorsSubscription;
+  final List<Sensor> discoveredSensors = List.empty();
+  final List<Sensor> connectedSensors = List.empty();
+  PairingBloc(this._connectedSensorsSubscription, {required this.sensorService}) : super(const _Initial()) {
+    _discoveredSensorsSubscription = sensorService.discoveredSensorsStream.listen(onDiscoveredSensorsStream);
+    _connectedSensorsSubscription = sensorService.connectedSensorsStream.listen(onConnectedSensorsStream);
+  }
+
+  void onDiscoveredSensorsStream(List<Sensor> newDiscoveredSensors) {
+    final bool discoveredSensorsChanged = discoveredSensors.equals(newDiscoveredSensors);
+  }
+
+  void onConnectedSensorsStream(List<Sensor> newConnectedSensors) {}
+
+  @override
+  Future<void> close() {
+    _discoveredSensorsSubscription.cancel();
+    _connectedSensorsSubscription.cancel();
+    return super.close();
+  }
 
   @override
   Stream<PairingState> mapEventToState(PairingEvent event) async* {
