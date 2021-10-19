@@ -56,12 +56,16 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   Stream<PairingState> mapEventToState(PairingEvent event) async* {
     yield* event.map(
       pairingStarted: (e) async* {
-        yield PairingState.pairing(connectedSensors: List.empty(), availableSensors: List.empty());
+        yield PairingState.pairing(
+            connectedSensors: connectedSensors,
+            availableSensors: discoveredSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
       },
       availableSensorChanged: (e) async* {
         yield state.maybeMap(
           initial: (s) {
-            return PairingState.pairing(connectedSensors: List.empty(), availableSensors: e.availableSensors);
+            return PairingState.pairing(
+                connectedSensors: connectedSensors,
+                availableSensors: e.availableSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
           },
           pairing: (s) {
             return s.copyWith(availableSensors: e.availableSensors);
@@ -74,13 +78,17 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
       connectedSensorChanged: (e) async* {
         yield state.map(
           initial: (s) {
-            return PairingState.pairing(connectedSensors: e.connectedSensors, availableSensors: List.empty());
+            return PairingState.pairing(
+                connectedSensors: e.connectedSensors,
+                availableSensors: discoveredSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
           },
           pairing: (s) {
-            return s.copyWith(availableSensors: List.empty(), connectedSensors: e.connectedSensors);
+            return s.copyWith(connectedSensors: e.connectedSensors);
           },
           paired: (s) {
-            return PairingState.pairing(connectedSensors: e.connectedSensors, availableSensors: List.empty());
+            return PairingState.pairing(
+                connectedSensors: e.connectedSensors,
+                availableSensors: discoveredSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
           },
         );
       },
