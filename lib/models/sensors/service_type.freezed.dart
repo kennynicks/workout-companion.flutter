@@ -115,12 +115,18 @@ class _$HeartrateCopyWithImpl<$Res> extends _$ServiceTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Heartrate implements Heartrate {
+class _$Heartrate with DiagnosticableTreeMixin implements Heartrate {
   const _$Heartrate();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ServiceType.heartrate()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ServiceType.heartrate'));
   }
 
   @override
@@ -222,12 +228,18 @@ class _$CadenceCopyWithImpl<$Res> extends _$ServiceTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Cadence implements Cadence {
+class _$Cadence with DiagnosticableTreeMixin implements Cadence {
   const _$Cadence();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ServiceType.cadence()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ServiceType.cadence'));
   }
 
   @override
@@ -329,12 +341,18 @@ class _$TrainerCopyWithImpl<$Res> extends _$ServiceTypeCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$Trainer implements Trainer {
+class _$Trainer with DiagnosticableTreeMixin implements Trainer {
   const _$Trainer();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ServiceType.trainer()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ServiceType.trainer'));
   }
 
   @override

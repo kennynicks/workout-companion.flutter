@@ -29,7 +29,7 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
       discoveredSensors.clear();
       discoveredSensors.addAll(newDiscoveredSensors);
       add(
-        PairingEvent.availableSensorChanged(availableSensors: discoveredSensors),
+        const PairingEvent.availableSensorChanged(),
       );
     }
   }
@@ -40,7 +40,7 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
       connectedSensors.clear();
       connectedSensors.addAll(newConnectedSensors);
       add(
-        PairingEvent.connectedSensorChanged(connectedSensors: connectedSensors),
+        const PairingEvent.connectedSensorChanged(),
       );
     }
   }
@@ -56,19 +56,19 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   Stream<PairingState> mapEventToState(PairingEvent event) async* {
     yield* event.map(
       pairingStarted: (e) async* {
+        //TODO start and stop scanning
         yield PairingState.pairing(
-            connectedSensors: connectedSensors,
-            availableSensors: discoveredSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
+          connectedSensors: connectedSensors,
+          availableSensors: discoveredSensors,
+        );
       },
       availableSensorChanged: (e) async* {
         yield state.maybeMap(
           initial: (s) {
-            return PairingState.pairing(
-                connectedSensors: connectedSensors,
-                availableSensors: e.availableSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
+            return PairingState.pairing(connectedSensors: connectedSensors, availableSensors: discoveredSensors);
           },
           pairing: (s) {
-            return s.copyWith(availableSensors: e.availableSensors);
+            return s.copyWith(availableSensors: discoveredSensors);
           },
           orElse: () {
             return const PairingState.paired();
@@ -78,17 +78,13 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
       connectedSensorChanged: (e) async* {
         yield state.map(
           initial: (s) {
-            return PairingState.pairing(
-                connectedSensors: e.connectedSensors,
-                availableSensors: discoveredSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
+            return PairingState.pairing(connectedSensors: connectedSensors, availableSensors: discoveredSensors);
           },
           pairing: (s) {
-            return s.copyWith(connectedSensors: e.connectedSensors);
+            return s.copyWith(connectedSensors: connectedSensors);
           },
           paired: (s) {
-            return PairingState.pairing(
-                connectedSensors: e.connectedSensors,
-                availableSensors: discoveredSensors); //TODO NICO: so richtig? connectedSensors vs List.empty()
+            return PairingState.pairing(connectedSensors: connectedSensors, availableSensors: discoveredSensors);
           },
         );
       },

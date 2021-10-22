@@ -5,13 +5,14 @@ import 'package:workout_companion_flutter/models/sensors/service_type.dart';
 abstract class Service<T> {
   final String guid;
   final ServiceType type;
-  Service({required this.guid, required this.type});
+  Service({required this.guid, required this.type}) {
+    valueStream = _streamController.stream.asBroadcastStream();
+  }
 
   final StreamController<T> _streamController = StreamController<T>();
-  Stream<T>? _valueStream;
+  late final Stream<T> valueStream;
+}
 
-  Stream<T> get valueStream {
-    _valueStream ??= _streamController.stream.asBroadcastStream();
-    return _valueStream!;
-  }
+class HeartrateService extends Service<int> {
+  HeartrateService(String guid) : super(guid: guid, type: const ServiceType.heartrate());
 }

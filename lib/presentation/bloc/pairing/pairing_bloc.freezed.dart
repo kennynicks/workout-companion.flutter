@@ -21,18 +21,12 @@ class _$PairingEventTearOff {
     return const _PairingStarted();
   }
 
-  _AvailableSensorChanged availableSensorChanged(
-      {required List<Sensor> availableSensors}) {
-    return _AvailableSensorChanged(
-      availableSensors: availableSensors,
-    );
+  _AvailableSensorChanged availableSensorChanged() {
+    return const _AvailableSensorChanged();
   }
 
-  _ConnectedSensorChanged connectedSensorChanged(
-      {required List<Sensor> connectedSensors}) {
-    return _ConnectedSensorChanged(
-      connectedSensors: connectedSensors,
-    );
+  _ConnectedSensorChanged connectedSensorChanged() {
+    return const _ConnectedSensorChanged();
   }
 
   _ConnectSensor connectSensor({required Sensor sensor}) {
@@ -56,10 +50,8 @@ mixin _$PairingEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() pairingStarted,
-    required TResult Function(List<Sensor> availableSensors)
-        availableSensorChanged,
-    required TResult Function(List<Sensor> connectedSensors)
-        connectedSensorChanged,
+    required TResult Function() availableSensorChanged,
+    required TResult Function() connectedSensorChanged,
     required TResult Function(Sensor sensor) connectSensor,
     required TResult Function(Sensor sensor) disconnectSensor,
   }) =>
@@ -67,8 +59,8 @@ mixin _$PairingEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
   }) =>
@@ -76,8 +68,8 @@ mixin _$PairingEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
     required TResult orElse(),
@@ -172,10 +164,8 @@ class _$_PairingStarted implements _PairingStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() pairingStarted,
-    required TResult Function(List<Sensor> availableSensors)
-        availableSensorChanged,
-    required TResult Function(List<Sensor> connectedSensors)
-        connectedSensorChanged,
+    required TResult Function() availableSensorChanged,
+    required TResult Function() connectedSensorChanged,
     required TResult Function(Sensor sensor) connectSensor,
     required TResult Function(Sensor sensor) disconnectSensor,
   }) {
@@ -186,8 +176,8 @@ class _$_PairingStarted implements _PairingStarted {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
   }) {
@@ -198,8 +188,8 @@ class _$_PairingStarted implements _PairingStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
     required TResult orElse(),
@@ -262,7 +252,6 @@ abstract class _$AvailableSensorChangedCopyWith<$Res> {
   factory _$AvailableSensorChangedCopyWith(_AvailableSensorChanged value,
           $Res Function(_AvailableSensorChanged) then) =
       __$AvailableSensorChangedCopyWithImpl<$Res>;
-  $Res call({List<Sensor> availableSensors});
 }
 
 /// @nodoc
@@ -275,91 +264,62 @@ class __$AvailableSensorChangedCopyWithImpl<$Res>
 
   @override
   _AvailableSensorChanged get _value => super._value as _AvailableSensorChanged;
-
-  @override
-  $Res call({
-    Object? availableSensors = freezed,
-  }) {
-    return _then(_AvailableSensorChanged(
-      availableSensors: availableSensors == freezed
-          ? _value.availableSensors
-          : availableSensors // ignore: cast_nullable_to_non_nullable
-              as List<Sensor>,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_AvailableSensorChanged implements _AvailableSensorChanged {
-  const _$_AvailableSensorChanged({required this.availableSensors});
-
-  @override
-  final List<Sensor> availableSensors;
+  const _$_AvailableSensorChanged();
 
   @override
   String toString() {
-    return 'PairingEvent.availableSensorChanged(availableSensors: $availableSensors)';
+    return 'PairingEvent.availableSensorChanged()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _AvailableSensorChanged &&
-            (identical(other.availableSensors, availableSensors) ||
-                const DeepCollectionEquality()
-                    .equals(other.availableSensors, availableSensors)));
+    return identical(this, other) || (other is _AvailableSensorChanged);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(availableSensors);
-
-  @JsonKey(ignore: true)
-  @override
-  _$AvailableSensorChangedCopyWith<_AvailableSensorChanged> get copyWith =>
-      __$AvailableSensorChangedCopyWithImpl<_AvailableSensorChanged>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() pairingStarted,
-    required TResult Function(List<Sensor> availableSensors)
-        availableSensorChanged,
-    required TResult Function(List<Sensor> connectedSensors)
-        connectedSensorChanged,
+    required TResult Function() availableSensorChanged,
+    required TResult Function() connectedSensorChanged,
     required TResult Function(Sensor sensor) connectSensor,
     required TResult Function(Sensor sensor) disconnectSensor,
   }) {
-    return availableSensorChanged(availableSensors);
+    return availableSensorChanged();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
   }) {
-    return availableSensorChanged?.call(availableSensors);
+    return availableSensorChanged?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
     required TResult orElse(),
   }) {
     if (availableSensorChanged != null) {
-      return availableSensorChanged(availableSensors);
+      return availableSensorChanged();
     }
     return orElse();
   }
@@ -408,13 +368,7 @@ class _$_AvailableSensorChanged implements _AvailableSensorChanged {
 }
 
 abstract class _AvailableSensorChanged implements PairingEvent {
-  const factory _AvailableSensorChanged(
-      {required List<Sensor> availableSensors}) = _$_AvailableSensorChanged;
-
-  List<Sensor> get availableSensors => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$AvailableSensorChangedCopyWith<_AvailableSensorChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _AvailableSensorChanged() = _$_AvailableSensorChanged;
 }
 
 /// @nodoc
@@ -422,7 +376,6 @@ abstract class _$ConnectedSensorChangedCopyWith<$Res> {
   factory _$ConnectedSensorChangedCopyWith(_ConnectedSensorChanged value,
           $Res Function(_ConnectedSensorChanged) then) =
       __$ConnectedSensorChangedCopyWithImpl<$Res>;
-  $Res call({List<Sensor> connectedSensors});
 }
 
 /// @nodoc
@@ -435,91 +388,62 @@ class __$ConnectedSensorChangedCopyWithImpl<$Res>
 
   @override
   _ConnectedSensorChanged get _value => super._value as _ConnectedSensorChanged;
-
-  @override
-  $Res call({
-    Object? connectedSensors = freezed,
-  }) {
-    return _then(_ConnectedSensorChanged(
-      connectedSensors: connectedSensors == freezed
-          ? _value.connectedSensors
-          : connectedSensors // ignore: cast_nullable_to_non_nullable
-              as List<Sensor>,
-    ));
-  }
 }
 
 /// @nodoc
 
 class _$_ConnectedSensorChanged implements _ConnectedSensorChanged {
-  const _$_ConnectedSensorChanged({required this.connectedSensors});
-
-  @override
-  final List<Sensor> connectedSensors;
+  const _$_ConnectedSensorChanged();
 
   @override
   String toString() {
-    return 'PairingEvent.connectedSensorChanged(connectedSensors: $connectedSensors)';
+    return 'PairingEvent.connectedSensorChanged()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _ConnectedSensorChanged &&
-            (identical(other.connectedSensors, connectedSensors) ||
-                const DeepCollectionEquality()
-                    .equals(other.connectedSensors, connectedSensors)));
+    return identical(this, other) || (other is _ConnectedSensorChanged);
   }
 
   @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(connectedSensors);
-
-  @JsonKey(ignore: true)
-  @override
-  _$ConnectedSensorChangedCopyWith<_ConnectedSensorChanged> get copyWith =>
-      __$ConnectedSensorChangedCopyWithImpl<_ConnectedSensorChanged>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() pairingStarted,
-    required TResult Function(List<Sensor> availableSensors)
-        availableSensorChanged,
-    required TResult Function(List<Sensor> connectedSensors)
-        connectedSensorChanged,
+    required TResult Function() availableSensorChanged,
+    required TResult Function() connectedSensorChanged,
     required TResult Function(Sensor sensor) connectSensor,
     required TResult Function(Sensor sensor) disconnectSensor,
   }) {
-    return connectedSensorChanged(connectedSensors);
+    return connectedSensorChanged();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
   }) {
-    return connectedSensorChanged?.call(connectedSensors);
+    return connectedSensorChanged?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
     required TResult orElse(),
   }) {
     if (connectedSensorChanged != null) {
-      return connectedSensorChanged(connectedSensors);
+      return connectedSensorChanged();
     }
     return orElse();
   }
@@ -568,13 +492,7 @@ class _$_ConnectedSensorChanged implements _ConnectedSensorChanged {
 }
 
 abstract class _ConnectedSensorChanged implements PairingEvent {
-  const factory _ConnectedSensorChanged(
-      {required List<Sensor> connectedSensors}) = _$_ConnectedSensorChanged;
-
-  List<Sensor> get connectedSensors => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$ConnectedSensorChangedCopyWith<_ConnectedSensorChanged> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory _ConnectedSensorChanged() = _$_ConnectedSensorChanged;
 }
 
 /// @nodoc
@@ -643,10 +561,8 @@ class _$_ConnectSensor implements _ConnectSensor {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() pairingStarted,
-    required TResult Function(List<Sensor> availableSensors)
-        availableSensorChanged,
-    required TResult Function(List<Sensor> connectedSensors)
-        connectedSensorChanged,
+    required TResult Function() availableSensorChanged,
+    required TResult Function() connectedSensorChanged,
     required TResult Function(Sensor sensor) connectSensor,
     required TResult Function(Sensor sensor) disconnectSensor,
   }) {
@@ -657,8 +573,8 @@ class _$_ConnectSensor implements _ConnectSensor {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
   }) {
@@ -669,8 +585,8 @@ class _$_ConnectSensor implements _ConnectSensor {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
     required TResult orElse(),
@@ -799,10 +715,8 @@ class _$_DisconnectSensor implements _DisconnectSensor {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() pairingStarted,
-    required TResult Function(List<Sensor> availableSensors)
-        availableSensorChanged,
-    required TResult Function(List<Sensor> connectedSensors)
-        connectedSensorChanged,
+    required TResult Function() availableSensorChanged,
+    required TResult Function() connectedSensorChanged,
     required TResult Function(Sensor sensor) connectSensor,
     required TResult Function(Sensor sensor) disconnectSensor,
   }) {
@@ -813,8 +727,8 @@ class _$_DisconnectSensor implements _DisconnectSensor {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
   }) {
@@ -825,8 +739,8 @@ class _$_DisconnectSensor implements _DisconnectSensor {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? pairingStarted,
-    TResult Function(List<Sensor> availableSensors)? availableSensorChanged,
-    TResult Function(List<Sensor> connectedSensors)? connectedSensorChanged,
+    TResult Function()? availableSensorChanged,
+    TResult Function()? connectedSensorChanged,
     TResult Function(Sensor sensor)? connectSensor,
     TResult Function(Sensor sensor)? disconnectSensor,
     required TResult orElse(),
