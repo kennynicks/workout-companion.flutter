@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get_it/get_it.dart';
@@ -8,7 +9,7 @@ import 'package:workout_companion_flutter/models/sensors/sensor.dart';
 
 @singleton
 class SensorService extends Disposable {
-  final List<Sensor> _sensors = List.empty();
+  final List<Sensor> _sensors = [];
   final Map<String, StreamSubscription> _sensorSubscriptions = <String, StreamSubscription>{};
   final FlutterBlue flutterBlue;
   late final Stream<List<Sensor>> discoveredSensorsStream;
@@ -29,6 +30,7 @@ class SensorService extends Disposable {
   }
 
   void onConnectionEvent(ConnectionEvent connectionEvent) {
+    log("On Connection Event $connectionEvent");
     connectionEvent.state.maybeWhen(
       disconnected: () {
         unregisterSensor(connectionEvent.sensor);
@@ -45,11 +47,14 @@ class SensorService extends Disposable {
   }
 
   void _onScanResults(List<ScanResult> scanResults) {
+    log("_onScanResults $scanResults");
     _discoveredSensorsStreamController.add(scanResults.map((ScanResult scanResult) => Sensor.fromScanResult(scanResult)).toList());
   }
 
   Future startScan(List<Guid> serviceGuids) async {
-    if (!await flutterBlue.isScanning.last) {
+    log("In start scan. Is scanning = ${await flutterBlue.isScanning.first}");
+    if (!await flutterBlue.isScanning.first) {
+      log("Starting scan");
       flutterBlue.startScan(withServices: serviceGuids);
     }
   }

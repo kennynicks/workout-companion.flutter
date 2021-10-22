@@ -63,6 +63,12 @@ class _PageWidget extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
+            ElevatedButton(
+                onPressed: () async {
+                  // await getIt<FlutterBlue>().stopScan();
+                  BlocProvider.of<PairingBloc>(context).add(const PairingEvent.pairingStarted());
+                },
+                child: const Text("Start pairing")),
             Expanded(
               child: Column(
                 children: [

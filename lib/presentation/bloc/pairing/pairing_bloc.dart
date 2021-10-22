@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,9 +17,9 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   final SensorService sensorService;
   late final StreamSubscription _discoveredSensorsSubscription;
   late final StreamSubscription _connectedSensorsSubscription;
-  final List<Sensor> discoveredSensors = List.empty();
-  final List<Sensor> connectedSensors = List.empty();
-  PairingBloc(this._connectedSensorsSubscription, {required this.sensorService}) : super(const _Initial()) {
+  final List<Sensor> discoveredSensors = [];
+  final List<Sensor> connectedSensors = [];
+  PairingBloc({required this.sensorService}) : super(const _Initial()) {
     _discoveredSensorsSubscription = sensorService.discoveredSensorsStream.listen(onDiscoveredSensorsStream);
     _connectedSensorsSubscription = sensorService.connectedSensorsStream.listen(onConnectedSensorsStream);
   }
@@ -56,7 +57,8 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   Stream<PairingState> mapEventToState(PairingEvent event) async* {
     yield* event.map(
       pairingStarted: (e) async* {
-        //TODO start and stop scanning
+        log("pairing started");
+        await sensorService.startScan([]);
         yield PairingState.pairing(
           connectedSensors: connectedSensors,
           availableSensors: discoveredSensors,
@@ -65,12 +67,14 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
       availableSensorChanged: (e) async* {
         yield state.maybeMap(
           initial: (s) {
+            sensorService.startScan([]);
             return PairingState.pairing(connectedSensors: connectedSensors, availableSensors: discoveredSensors);
           },
           pairing: (s) {
             return s.copyWith(availableSensors: discoveredSensors);
           },
           orElse: () {
+            sensorService.stopScan();
             return const PairingState.paired();
           },
         );
@@ -78,12 +82,14 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
       connectedSensorChanged: (e) async* {
         yield state.map(
           initial: (s) {
+            sensorService.startScan([]);
             return PairingState.pairing(connectedSensors: connectedSensors, availableSensors: discoveredSensors);
           },
           pairing: (s) {
             return s.copyWith(connectedSensors: connectedSensors);
           },
           paired: (s) {
+            sensorService.startScan([]);
             return PairingState.pairing(connectedSensors: connectedSensors, availableSensors: discoveredSensors);
           },
         );
