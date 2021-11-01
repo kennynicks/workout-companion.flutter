@@ -47,10 +47,11 @@ class SensorService extends Disposable {
   }
 
   void _onScanResults(List<ScanResult> scanResults) {
-    log("_onScanResults $scanResults");
     _discoveredSensorsStreamController.add(scanResults.map((ScanResult scanResult) => Sensor.fromScanResult(scanResult)).toList());
   }
 
+//TODO RECONNECT
+//TODO VALUES EMITTEN
   Future startScan(List<Guid> serviceGuids) async {
     log("In start scan. Is scanning = ${await flutterBlue.isScanning.first}");
     if (!await flutterBlue.isScanning.first) {

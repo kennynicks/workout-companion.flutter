@@ -25,7 +25,9 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   }
 
   void onDiscoveredSensorsStream(List<Sensor> newDiscoveredSensors) {
-    final bool discoveredSensorsChanged = discoveredSensors.equals(newDiscoveredSensors);
+    log("onDiscoveredSensorsStream ${newDiscoveredSensors.length}");
+    final bool discoveredSensorsChanged = !discoveredSensors.equals(newDiscoveredSensors);
+    log("discoveredSensorsChanged = $discoveredSensorsChanged");
     if (discoveredSensorsChanged) {
       discoveredSensors.clear();
       discoveredSensors.addAll(newDiscoveredSensors);
@@ -36,7 +38,8 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   }
 
   void onConnectedSensorsStream(List<Sensor> newConnectedSensors) {
-    final bool connectedSensorsChanged = connectedSensors.equals(newConnectedSensors);
+    log("onConnectedSensorsStream ${newConnectedSensors.length}");
+    final bool connectedSensorsChanged = !connectedSensors.equals(newConnectedSensors);
     if (connectedSensorsChanged) {
       connectedSensors.clear();
       connectedSensors.addAll(newConnectedSensors);
