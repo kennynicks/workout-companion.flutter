@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:workout_companion_flutter/models/sensors/connection_event.dart';
 import 'package:workout_companion_flutter/models/sensors/service_type.dart';
 
-class Sensor {
+class Sensor implements Comparable<Sensor> {
   Sensor({required this.name, required this.id, required this.btDevice, required this.serviceTypes}) {
     stateStream = _stateStreamController.stream.asBroadcastStream();
   }
@@ -29,4 +30,17 @@ class Sensor {
 
   @override
   int get hashCode => hashValues(id, name);
+
+  @override
+  int compareTo(Sensor other) {
+    if (name.isNotEmpty && other.name.isNotEmpty) {
+      return name.compareTo(other.name);
+    } else if (name.isEmpty && other.name.isNotEmpty) {
+      return 1;
+    } else if (name.isNotEmpty && other.name.isEmpty) {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
 }

@@ -31,7 +31,7 @@ class PairingPage extends StatelessWidget {
   }
 }
 
-Widget getSensorList(List<Sensor> sensors) {
+Widget getSensorList(List<Sensor> sensors, void Function(Sensor sensor) onTap) {
   return Expanded(
     child: ListView.builder(
       itemCount: sensors.length,
@@ -39,7 +39,9 @@ Widget getSensorList(List<Sensor> sensors) {
         return ListTile(
           title: Text(sensors[index].name),
           subtitle: Text(sensors[index].id),
-          onTap: () {},
+          onTap: () {
+            onTap(sensors[index]);
+          },
         );
       },
     ),
@@ -49,10 +51,8 @@ Widget getSensorList(List<Sensor> sensors) {
 class _PageWidget extends StatelessWidget {
   Widget getInitialBody(BuildContext context) {
     BlocProvider.of<PairingBloc>(context).add(const PairingEvent.pairingStarted());
-    return const Expanded(
-      child: Center(
-        child: CircularProgressIndicator(),
-      ),
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 
@@ -69,7 +69,10 @@ class _PageWidget extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              getSensorList(connectedSensors),
+              getSensorList(connectedSensors, (sensor) {
+                log("About to disconnect sensor ${sensor.id}");
+                BlocProvider.of<PairingBloc>(context).add(PairingEvent.disconnectSensor(sensor: sensor));
+              }),
             ],
           ),
         ),
@@ -84,7 +87,10 @@ class _PageWidget extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              getSensorList(availableSensors),
+              getSensorList(availableSensors, (sensor) {
+                log("About to connect sensor ${sensor.id}");
+                BlocProvider.of<PairingBloc>(context).add(PairingEvent.connectSensor(sensor: sensor));
+              }),
             ],
           ),
         ),

@@ -9,7 +9,8 @@ import 'package:workout_companion_flutter/models/sensors/sensor.dart';
 
 @singleton
 class SensorService extends Disposable {
-  final List<Sensor> _sensors = [];
+  final Set<Sensor> _connectedSensors = {};
+  final Set<Sensor> _discoveredSensors = {};
   final Map<String, StreamSubscription> _sensorSubscriptions = <String, StreamSubscription>{};
   final FlutterBlue flutterBlue;
   late final Stream<List<Sensor>> discoveredSensorsStream;
@@ -29,28 +30,54 @@ class SensorService extends Disposable {
     _sensorSubscriptions[sensor.id] = sensor.stateStream.listen(onConnectionEvent);
   }
 
+  void _updateDiscoveredSensors() {
+    _discoveredSensorsStreamController.add(sortList(_discoveredSensors.toList()));
+  }
+
+  void _updateConnectedSensors() {
+    _connectedSensorsStreamController.add(sortList(_connectedSensors.toList()));
+  }
+
   void onConnectionEvent(ConnectionEvent connectionEvent) {
     log("On Connection Event $connectionEvent");
-    connectionEvent.state.maybeWhen(
-      disconnected: () {
-        unregisterSensor(connectionEvent.sensor);
-        //TODO reconnect
-      },
-      orElse: () {},
-    );
+    connectionEvent.state.when(disconnected: () {
+      log("lost connection to sensor ${connectionEvent.sensor.id}");
+      unregisterSensor(connectionEvent.sensor);
+      //TODO reconnect
+    }, connected: () {
+      log("got connection for sensor ${connectionEvent.sensor.id}");
+    });
+  }
+
+  List<Sensor> sortList(List<Sensor> sensors) {
+    sensors.sort((a, b) {
+      return a.compareTo(b);
+    });
+    return sensors;
   }
 
   void unregisterSensor(Sensor sensor) {
-    _sensors.remove(sensor);
+    _connectedSensors.remove(sensor);
     _sensorSubscriptions[sensor.id]?.cancel();
-    _connectedSensorsStreamController.add(_sensors);
+    _updateConnectedSensors();
   }
 
-  void _onScanResults(List<ScanResult> scanResults) {
-    _discoveredSensorsStreamController.add(scanResults.map((ScanResult scanResult) => Sensor.fromScanResult(scanResult)).toList());
+  Future _onScanResults(List<ScanResult> scanResults) async {
+    final Set<Sensor> sensors = scanResults.map((ScanResult scanResult) => Sensor.fromScanResult(scanResult)).toSet();
+    final List<Sensor> discoveredSensors = [];
+    for (final Sensor sensor in sensors) {
+      final BluetoothDeviceState connectionState = await sensor.btDevice.state.first;
+      if (connectionState == BluetoothDeviceState.connected || connectionState == BluetoothDeviceState.connecting) {
+        addSensorWatchers(sensor);
+      } else {
+        discoveredSensors.add(sensor);
+      }
+    }
+    _discoveredSensors.clear();
+    _discoveredSensors.addAll(discoveredSensors);
+    _updateDiscoveredSensors();
   }
 
-//TODO RECONNECT
 //TODO VALUES EMITTEN
   Future startScan(List<Guid> serviceGuids) async {
     log("In start scan. Is scanning = ${await flutterBlue.isScanning.first}");
@@ -64,21 +91,35 @@ class SensorService extends Disposable {
     await flutterBlue.stopScan();
   }
 
-  Future connectSensor(Sensor sensor) async {
-    await sensor.btDevice.connect(autoConnect: false);
-    _sensors.add(sensor);
+  void addSensorWatchers(Sensor sensor) {
+    _connectedSensors.add(sensor);
     _registerForConnectionStateEvents(sensor);
-    _connectedSensorsStreamController.add(_sensors);
+    _updateConnectedSensors();
+  }
+
+  Future connectSensor(Sensor sensor) async {
+    log("connecting sensor ${sensor.id}");
+    await sensor.btDevice.connect(autoConnect: false);
+    log("connected sensor ${sensor.id}");
+    addSensorWatchers(sensor);
+    _discoveredSensors.remove(sensor);
+    _updateDiscoveredSensors();
   }
 
   Future disconnectSensor(Sensor sensor) async {
+    log("disconnecting sensor ${sensor.id}");
     unregisterSensor(sensor);
     await sensor.btDevice.disconnect();
+    log("sensor disconnected");
+    _discoveredSensors.add(sensor);
+    _updateDiscoveredSensors();
   }
 
   @override
   FutureOr onDispose() {
-    //TODO unregister sensors
+    for (final sensor in _connectedSensors) {
+      unregisterSensor(sensor);
+    }
     _scanSubscription.cancel();
   }
 }
