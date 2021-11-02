@@ -17,6 +17,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ServiceTypeTearOff {
   const _$ServiceTypeTearOff();
 
+  Unknown unknown() {
+    return const Unknown();
+  }
+
   Heartrate heartrate() {
     return const Heartrate();
   }
@@ -25,8 +29,12 @@ class _$ServiceTypeTearOff {
     return const Cadence();
   }
 
-  Trainer trainer() {
-    return const Trainer();
+  CyclingPower cyclingPower() {
+    return const CyclingPower();
+  }
+
+  FitnessMachine fitnessMachnine() {
+    return const FitnessMachine();
   }
 }
 
@@ -37,45 +45,57 @@ const $ServiceType = _$ServiceTypeTearOff();
 mixin _$ServiceType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() unknown,
     required TResult Function() heartrate,
     required TResult Function() cadence,
-    required TResult Function() trainer,
+    required TResult Function() cyclingPower,
+    required TResult Function() fitnessMachnine,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Unknown value) unknown,
     required TResult Function(Heartrate value) heartrate,
     required TResult Function(Cadence value) cadence,
-    required TResult Function(Trainer value) trainer,
+    required TResult Function(CyclingPower value) cyclingPower,
+    required TResult Function(FitnessMachine value) fitnessMachnine,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -95,6 +115,131 @@ class _$ServiceTypeCopyWithImpl<$Res> implements $ServiceTypeCopyWith<$Res> {
   final ServiceType _value;
   // ignore: unused_field
   final $Res Function(ServiceType) _then;
+}
+
+/// @nodoc
+abstract class $UnknownCopyWith<$Res> {
+  factory $UnknownCopyWith(Unknown value, $Res Function(Unknown) then) =
+      _$UnknownCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$UnknownCopyWithImpl<$Res> extends _$ServiceTypeCopyWithImpl<$Res>
+    implements $UnknownCopyWith<$Res> {
+  _$UnknownCopyWithImpl(Unknown _value, $Res Function(Unknown) _then)
+      : super(_value, (v) => _then(v as Unknown));
+
+  @override
+  Unknown get _value => super._value as Unknown;
+}
+
+/// @nodoc
+
+class _$Unknown with DiagnosticableTreeMixin implements Unknown {
+  const _$Unknown();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServiceType.unknown()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ServiceType.unknown'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is Unknown);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unknown,
+    required TResult Function() heartrate,
+    required TResult Function() cadence,
+    required TResult Function() cyclingPower,
+    required TResult Function() fitnessMachnine,
+  }) {
+    return unknown();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unknown,
+    TResult Function()? heartrate,
+    TResult Function()? cadence,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
+  }) {
+    return unknown?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unknown,
+    TResult Function()? heartrate,
+    TResult Function()? cadence,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
+    required TResult orElse(),
+  }) {
+    if (unknown != null) {
+      return unknown();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Unknown value) unknown,
+    required TResult Function(Heartrate value) heartrate,
+    required TResult Function(Cadence value) cadence,
+    required TResult Function(CyclingPower value) cyclingPower,
+    required TResult Function(FitnessMachine value) fitnessMachnine,
+  }) {
+    return unknown(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
+    TResult Function(Heartrate value)? heartrate,
+    TResult Function(Cadence value)? cadence,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
+  }) {
+    return unknown?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
+    TResult Function(Heartrate value)? heartrate,
+    TResult Function(Cadence value)? cadence,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
+    required TResult orElse(),
+  }) {
+    if (unknown != null) {
+      return unknown(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Unknown implements ServiceType {
+  const factory Unknown() = _$Unknown;
 }
 
 /// @nodoc
@@ -140,9 +285,11 @@ class _$Heartrate with DiagnosticableTreeMixin implements Heartrate {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() unknown,
     required TResult Function() heartrate,
     required TResult Function() cadence,
-    required TResult Function() trainer,
+    required TResult Function() cyclingPower,
+    required TResult Function() fitnessMachnine,
   }) {
     return heartrate();
   }
@@ -150,9 +297,11 @@ class _$Heartrate with DiagnosticableTreeMixin implements Heartrate {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
   }) {
     return heartrate?.call();
   }
@@ -160,9 +309,11 @@ class _$Heartrate with DiagnosticableTreeMixin implements Heartrate {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
     required TResult orElse(),
   }) {
     if (heartrate != null) {
@@ -174,9 +325,11 @@ class _$Heartrate with DiagnosticableTreeMixin implements Heartrate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Unknown value) unknown,
     required TResult Function(Heartrate value) heartrate,
     required TResult Function(Cadence value) cadence,
-    required TResult Function(Trainer value) trainer,
+    required TResult Function(CyclingPower value) cyclingPower,
+    required TResult Function(FitnessMachine value) fitnessMachnine,
   }) {
     return heartrate(this);
   }
@@ -184,9 +337,11 @@ class _$Heartrate with DiagnosticableTreeMixin implements Heartrate {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
   }) {
     return heartrate?.call(this);
   }
@@ -194,9 +349,11 @@ class _$Heartrate with DiagnosticableTreeMixin implements Heartrate {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
     required TResult orElse(),
   }) {
     if (heartrate != null) {
@@ -253,9 +410,11 @@ class _$Cadence with DiagnosticableTreeMixin implements Cadence {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() unknown,
     required TResult Function() heartrate,
     required TResult Function() cadence,
-    required TResult Function() trainer,
+    required TResult Function() cyclingPower,
+    required TResult Function() fitnessMachnine,
   }) {
     return cadence();
   }
@@ -263,9 +422,11 @@ class _$Cadence with DiagnosticableTreeMixin implements Cadence {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
   }) {
     return cadence?.call();
   }
@@ -273,9 +434,11 @@ class _$Cadence with DiagnosticableTreeMixin implements Cadence {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
     required TResult orElse(),
   }) {
     if (cadence != null) {
@@ -287,9 +450,11 @@ class _$Cadence with DiagnosticableTreeMixin implements Cadence {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Unknown value) unknown,
     required TResult Function(Heartrate value) heartrate,
     required TResult Function(Cadence value) cadence,
-    required TResult Function(Trainer value) trainer,
+    required TResult Function(CyclingPower value) cyclingPower,
+    required TResult Function(FitnessMachine value) fitnessMachnine,
   }) {
     return cadence(this);
   }
@@ -297,9 +462,11 @@ class _$Cadence with DiagnosticableTreeMixin implements Cadence {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
   }) {
     return cadence?.call(this);
   }
@@ -307,9 +474,11 @@ class _$Cadence with DiagnosticableTreeMixin implements Cadence {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
     required TResult orElse(),
   }) {
     if (cadence != null) {
@@ -324,40 +493,42 @@ abstract class Cadence implements ServiceType {
 }
 
 /// @nodoc
-abstract class $TrainerCopyWith<$Res> {
-  factory $TrainerCopyWith(Trainer value, $Res Function(Trainer) then) =
-      _$TrainerCopyWithImpl<$Res>;
+abstract class $CyclingPowerCopyWith<$Res> {
+  factory $CyclingPowerCopyWith(
+          CyclingPower value, $Res Function(CyclingPower) then) =
+      _$CyclingPowerCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$TrainerCopyWithImpl<$Res> extends _$ServiceTypeCopyWithImpl<$Res>
-    implements $TrainerCopyWith<$Res> {
-  _$TrainerCopyWithImpl(Trainer _value, $Res Function(Trainer) _then)
-      : super(_value, (v) => _then(v as Trainer));
+class _$CyclingPowerCopyWithImpl<$Res> extends _$ServiceTypeCopyWithImpl<$Res>
+    implements $CyclingPowerCopyWith<$Res> {
+  _$CyclingPowerCopyWithImpl(
+      CyclingPower _value, $Res Function(CyclingPower) _then)
+      : super(_value, (v) => _then(v as CyclingPower));
 
   @override
-  Trainer get _value => super._value as Trainer;
+  CyclingPower get _value => super._value as CyclingPower;
 }
 
 /// @nodoc
 
-class _$Trainer with DiagnosticableTreeMixin implements Trainer {
-  const _$Trainer();
+class _$CyclingPower with DiagnosticableTreeMixin implements CyclingPower {
+  const _$CyclingPower();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ServiceType.trainer()';
+    return 'ServiceType.cyclingPower()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'ServiceType.trainer'));
+    properties..add(DiagnosticsProperty('type', 'ServiceType.cyclingPower'));
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is Trainer);
+    return identical(this, other) || (other is CyclingPower);
   }
 
   @override
@@ -366,33 +537,39 @@ class _$Trainer with DiagnosticableTreeMixin implements Trainer {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() unknown,
     required TResult Function() heartrate,
     required TResult Function() cadence,
-    required TResult Function() trainer,
+    required TResult Function() cyclingPower,
+    required TResult Function() fitnessMachnine,
   }) {
-    return trainer();
+    return cyclingPower();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
   }) {
-    return trainer?.call();
+    return cyclingPower?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unknown,
     TResult Function()? heartrate,
     TResult Function()? cadence,
-    TResult Function()? trainer,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
     required TResult orElse(),
   }) {
-    if (trainer != null) {
-      return trainer();
+    if (cyclingPower != null) {
+      return cyclingPower();
     }
     return orElse();
   }
@@ -400,38 +577,171 @@ class _$Trainer with DiagnosticableTreeMixin implements Trainer {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(Unknown value) unknown,
     required TResult Function(Heartrate value) heartrate,
     required TResult Function(Cadence value) cadence,
-    required TResult Function(Trainer value) trainer,
+    required TResult Function(CyclingPower value) cyclingPower,
+    required TResult Function(FitnessMachine value) fitnessMachnine,
   }) {
-    return trainer(this);
+    return cyclingPower(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
   }) {
-    return trainer?.call(this);
+    return cyclingPower?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
     TResult Function(Heartrate value)? heartrate,
     TResult Function(Cadence value)? cadence,
-    TResult Function(Trainer value)? trainer,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
     required TResult orElse(),
   }) {
-    if (trainer != null) {
-      return trainer(this);
+    if (cyclingPower != null) {
+      return cyclingPower(this);
     }
     return orElse();
   }
 }
 
-abstract class Trainer implements ServiceType {
-  const factory Trainer() = _$Trainer;
+abstract class CyclingPower implements ServiceType {
+  const factory CyclingPower() = _$CyclingPower;
+}
+
+/// @nodoc
+abstract class $FitnessMachineCopyWith<$Res> {
+  factory $FitnessMachineCopyWith(
+          FitnessMachine value, $Res Function(FitnessMachine) then) =
+      _$FitnessMachineCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$FitnessMachineCopyWithImpl<$Res> extends _$ServiceTypeCopyWithImpl<$Res>
+    implements $FitnessMachineCopyWith<$Res> {
+  _$FitnessMachineCopyWithImpl(
+      FitnessMachine _value, $Res Function(FitnessMachine) _then)
+      : super(_value, (v) => _then(v as FitnessMachine));
+
+  @override
+  FitnessMachine get _value => super._value as FitnessMachine;
+}
+
+/// @nodoc
+
+class _$FitnessMachine with DiagnosticableTreeMixin implements FitnessMachine {
+  const _$FitnessMachine();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServiceType.fitnessMachnine()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ServiceType.fitnessMachnine'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is FitnessMachine);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unknown,
+    required TResult Function() heartrate,
+    required TResult Function() cadence,
+    required TResult Function() cyclingPower,
+    required TResult Function() fitnessMachnine,
+  }) {
+    return fitnessMachnine();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? unknown,
+    TResult Function()? heartrate,
+    TResult Function()? cadence,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
+  }) {
+    return fitnessMachnine?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unknown,
+    TResult Function()? heartrate,
+    TResult Function()? cadence,
+    TResult Function()? cyclingPower,
+    TResult Function()? fitnessMachnine,
+    required TResult orElse(),
+  }) {
+    if (fitnessMachnine != null) {
+      return fitnessMachnine();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Unknown value) unknown,
+    required TResult Function(Heartrate value) heartrate,
+    required TResult Function(Cadence value) cadence,
+    required TResult Function(CyclingPower value) cyclingPower,
+    required TResult Function(FitnessMachine value) fitnessMachnine,
+  }) {
+    return fitnessMachnine(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
+    TResult Function(Heartrate value)? heartrate,
+    TResult Function(Cadence value)? cadence,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
+  }) {
+    return fitnessMachnine?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Unknown value)? unknown,
+    TResult Function(Heartrate value)? heartrate,
+    TResult Function(Cadence value)? cadence,
+    TResult Function(CyclingPower value)? cyclingPower,
+    TResult Function(FitnessMachine value)? fitnessMachnine,
+    required TResult orElse(),
+  }) {
+    if (fitnessMachnine != null) {
+      return fitnessMachnine(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FitnessMachine implements ServiceType {
+  const factory FitnessMachine() = _$FitnessMachine;
 }

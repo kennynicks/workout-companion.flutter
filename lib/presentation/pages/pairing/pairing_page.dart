@@ -48,33 +48,17 @@ Widget getSensorList(List<Sensor> sensors) {
 
 class _PageWidget extends StatelessWidget {
   Widget getInitialBody(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () async {
-            // await getIt<FlutterBlue>().stopScan();
-            BlocProvider.of<PairingBloc>(context).add(const PairingEvent.pairingStarted());
-          },
-          child: const Text("Start pairing"),
-        ),
-        const Expanded(
-          child: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
-      ],
+    BlocProvider.of<PairingBloc>(context).add(const PairingEvent.pairingStarted());
+    return const Expanded(
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 
   Widget getPairingBody(BuildContext context, List<Sensor> availableSensors, List<Sensor> connectedSensors) {
     return Column(
       children: [
-        ElevatedButton(
-            onPressed: () async {
-              // await getIt<FlutterBlue>().stopScan();
-              BlocProvider.of<PairingBloc>(context).add(const PairingEvent.pairingStarted());
-            },
-            child: const Text("Start pairing")),
         Flexible(
           child: Column(
             children: [

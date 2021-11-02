@@ -12,7 +12,3 @@ abstract class Service<T> {
   final StreamController<T> _streamController = StreamController<T>();
   late final Stream<T> valueStream;
 }
-
-class HeartrateService extends Service<int> {
-  HeartrateService(String guid) : super(guid: guid, type: const ServiceType.heartrate());
-}

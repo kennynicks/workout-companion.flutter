@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:workout_companion_flutter/models/sensors/base/service.dart';
 import 'package:workout_companion_flutter/models/sensors/connection_event.dart';
 import 'package:workout_companion_flutter/models/sensors/service_type.dart';
 
