@@ -39,13 +39,13 @@ class SensorService extends Disposable {
   }
 
   void onConnectionEvent(ConnectionEvent connectionEvent) {
-    log("On Connection Event $connectionEvent");
+    log("On Connection Event $connectionEvent", time: DateTime.now());
     connectionEvent.state.when(disconnected: () {
-      log("lost connection to sensor ${connectionEvent.sensor.id}");
+      log("lost connection to sensor ${connectionEvent.sensor.id} ${DateTime.now()}");
       unregisterSensor(connectionEvent.sensor);
       //TODO reconnect
     }, connected: () {
-      log("got connection for sensor ${connectionEvent.sensor.id}");
+      log("got connection for sensor ${connectionEvent.sensor.id} ${DateTime.now()}");
     });
   }
 
@@ -57,6 +57,7 @@ class SensorService extends Disposable {
   }
 
   void unregisterSensor(Sensor sensor) {
+    log("unregistering sensor ${sensor.id}");
     _connectedSensors.remove(sensor);
     _sensorSubscriptions[sensor.id]?.cancel();
     _updateConnectedSensors();
@@ -92,6 +93,7 @@ class SensorService extends Disposable {
   }
 
   void addSensorWatchers(Sensor sensor) {
+    log("adding sensor watchers for ${sensor.id}");
     _connectedSensors.add(sensor);
     _registerForConnectionStateEvents(sensor);
     _updateConnectedSensors();
@@ -99,11 +101,15 @@ class SensorService extends Disposable {
 
   Future connectSensor(Sensor sensor) async {
     log("connecting sensor ${sensor.id}");
-    await sensor.btDevice.connect(autoConnect: false);
-    log("connected sensor ${sensor.id}");
-    addSensorWatchers(sensor);
-    _discoveredSensors.remove(sensor);
-    _updateDiscoveredSensors();
+    try {
+      await sensor.btDevice.connect(autoConnect: false, timeout: const Duration(seconds: 10));
+      log("connected sensor ${sensor.id}");
+      addSensorWatchers(sensor);
+      _discoveredSensors.remove(sensor);
+      _updateDiscoveredSensors();
+    } catch (err) {
+      log("Timeout while connecting", error: err);
+    }
   }
 
   Future disconnectSensor(Sensor sensor) async {

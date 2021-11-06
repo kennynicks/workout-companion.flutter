@@ -38,7 +38,7 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
   }
 
   void onConnectedSensorsStream(List<Sensor> newConnectedSensors) {
-    log("onConnectedSensorsStream ${newConnectedSensors.length}");
+    log("onConnectedSensorsStream ${newConnectedSensors.length} ${DateTime.now()}");
     final bool connectedSensorsChanged = !connectedSensors.equals(newConnectedSensors);
     if (connectedSensorsChanged) {
       connectedSensors.clear();

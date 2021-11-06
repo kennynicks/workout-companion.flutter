@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_companion_flutter/injection.dart';
 import 'package:workout_companion_flutter/models/sensors/sensor.dart';
 import 'package:workout_companion_flutter/presentation/bloc/pairing/pairing_bloc.dart';
+import 'package:workout_companion_flutter/presentation/widgets/pairing/available_sensor.dart';
 
 class PairingPage extends StatelessWidget {
   @override
@@ -29,6 +30,16 @@ class PairingPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget getAvailableSensors(List<Sensor> sensors) {
+  return Expanded(
+    child: ListView.builder(
+        itemCount: sensors.length,
+        itemBuilder: (context, index) {
+          return AvailableSensor(sensor: sensors[index]);
+        }),
+  );
 }
 
 Widget getSensorList(List<Sensor> sensors, void Function(Sensor sensor) onTap) {
@@ -87,10 +98,11 @@ class _PageWidget extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              getSensorList(availableSensors, (sensor) {
-                log("About to connect sensor ${sensor.id}");
-                BlocProvider.of<PairingBloc>(context).add(PairingEvent.connectSensor(sensor: sensor));
-              }),
+              getAvailableSensors(availableSensors),
+              // getSensorList(availableSensors, (sensor) {
+              //   log("About to connect sensor ${sensor.id}");
+              //   BlocProvider.of<PairingBloc>(context).add(PairingEvent.connectSensor(sensor: sensor));
+              // }),
             ],
           ),
         ),
